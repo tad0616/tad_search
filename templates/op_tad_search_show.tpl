@@ -49,7 +49,7 @@
 <form action="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php" method="post" id="searchForm<{$id}>">
     <div class="row">
         <{foreach from=$search_form key=key item=col_form name=search_form}>
-            <div class="col-md">
+            <div class="col-md-auto my-1">
                 <div class="input-group" data-toggle="tooltip" title="<{$col_form.placeholder}>">
                     <div class="input-group-prepend input-group-addon">
                         <span class="input-group-text" style="background-color: <{$col_form.color}>;"><{$col_form.title}></span>
@@ -58,7 +58,7 @@
                 </div>
             </div>
         <{/foreach}>
-        <div class="col-md">
+        <div class="col-md-auto my-1">
             <div class="input-group">
                 <input type="hidden" name="id" value="<{$id}>">
                 <div class="input-group-append input-group-btn">

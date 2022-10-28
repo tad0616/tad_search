@@ -186,7 +186,7 @@ class Tad_search
                         $search_form[$key]['type'] = 'and';
                         $search_form[$key]['require'] = 'validate[required]';
                         $search_form[$key]['color'] = '#f9e0e1';
-                        $search_form[$key]['placeholder'] = _MD_TADSEARCH_REQUIRE;
+                        $search_form[$key]['placeholder'] = $mode == 'return' ? _MB_TADSEARCH_REQUIRE : _MD_TADSEARCH_REQUIRE;
                     } elseif (substr($columns_arr[$col_title]['search'], 0, 2) == 'or') {
                         $search_form[$key]['type'] = 'or';
                         $search_form[$key]['require'] = '';
@@ -194,10 +194,10 @@ class Tad_search
                     }
                     if (strpos($columns_arr[$col_title]['search'], 'same') !== false) {
                         $search_form[$key]['rule'] = 'same';
-                        $search_form[$key]['placeholder'] .= sprintf(_MD_TADSEARCH_COMPLETE_VALUE, $col_title);
+                        $search_form[$key]['placeholder'] .= $mode == 'return' ? sprintf(_MB_TADSEARCH_COMPLETE_VALUE, $col_title) : sprintf(_MD_TADSEARCH_COMPLETE_VALUE, $col_title);
                     } elseif (strpos($columns_arr[$col_title]['search'], 'like') !== false) {
                         $search_form[$key]['rule'] = 'like';
-                        $search_form[$key]['placeholder'] .= sprintf(_MD_TADSEARCH_KEYWORD, $col_title);
+                        $search_form[$key]['placeholder'] .= $mode == 'return' ? sprintf(_MB_TADSEARCH_KEYWORD, $col_title) : sprintf(_MD_TADSEARCH_KEYWORD, $col_title);
                     }
                 }
             }
@@ -587,12 +587,7 @@ class Tad_search
     // 上傳界面
     public static function add()
     {
-        global $xoopsTpl, $xoopsModule;
-        // $mod_name = $xoopsModule->dirname();
-        // $TadUpFiles = new TadUpFiles($mod_name);
-        // $TadUpFiles->set_var("show_tip", false); //不顯示提示
-        // $upform = $TadUpFiles->upform(false, 'upfile', 1, false, '.xlsx');
-        // $xoopsTpl->assign("upform", $upform);
+        Tools::chk_is_adm('', '', __FILE__, __LINE__, 'index.php');
     }
 
 }

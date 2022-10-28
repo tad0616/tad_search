@@ -103,17 +103,20 @@ class Tools
     }
 
     // 權限檢查
-    public static function chk_is_adm($other = '', $id = '', $file = '', $line = '')
+    public static function chk_is_adm($other = '', $id = '', $file = '', $line = '', $to = '')
     {
+        if (empty($to)) {
+            $to = $_SERVER['PHP_SELF'];
+        }
         if ($_SESSION['tad_search_adm'] || ($other != '' && $_SESSION[$other]) || strpos($_SERVER['PHP_SELF'], '/admin/') !== false) {
             if (!empty($id) && $_SESSION[$other]) {
                 if (!in_array($id, $_SESSION[$other])) {
-                    redirect_header($_SERVER['PHP_SELF'], 3, _MD_TADSEARCH_NO_ACCESS_TO_THIS . " ($id)  {$file} ($line)");
+                    redirect_header($to, 3, _MD_TADSEARCH_NO_ACCESS_TO_THIS . " ($id)  {$file} ($line)");
                 }
             }
             return true;
         } else {
-            redirect_header($_SERVER['PHP_SELF'], 3, _MD_TADSEARCH_NO_PRIVILEGES . "{$file} ($line)");
+            redirect_header($to, 3, _MD_TADSEARCH_NO_PRIVILEGES . "{$file} ($line)");
         }
     }
 

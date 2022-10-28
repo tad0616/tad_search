@@ -23,3 +23,6 @@ define('_MB_TADSEARCH_NEED_KEY_IN', 'Please enter the following fields to search
 
 define('_MB_TADSEARCH_NO_VIEW_PRIVILEGES', 'No viewing privileges');
 define('_MB_TADSEARCH_BOUND_TO', 'Display data is bound to:');
+define('_MB_TADSEARCH_REQUIRE', 'Required field!');
+define('_MB_TADSEARCH_COMPLETE_VALUE', 'Please enter the full "%s" value');
+define('_MB_TADSEARCH_KEYWORD', 'Please enter the keyword "%s".');

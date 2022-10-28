@@ -23,3 +23,6 @@ define('_MB_TADSEARCH_NEED_KEY_IN', '請輸入以下欄位，以查尋資料');
 
 define('_MB_TADSEARCH_NO_VIEW_PRIVILEGES', '無觀看權限');
 define('_MB_TADSEARCH_BOUND_TO', '顯示資料已綁定：');
+define('_MB_TADSEARCH_REQUIRE', '必填！');
+define('_MB_TADSEARCH_COMPLETE_VALUE', '請輸入完整「%s」的值');
+define('_MB_TADSEARCH_KEYWORD', '請輸入「%s」的關鍵字');
