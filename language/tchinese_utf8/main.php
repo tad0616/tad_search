@@ -41,8 +41,8 @@ define('_MD_TADSEARCH_SEARCH_BY_THIS_NOTE', '<ol>
 <li>若無任何「以此欄位搜尋」，那會自動列出所有內容，並可進行任意搜尋</li>
 <li>「自動綁定 xxx」是指當使用者登入時，可以抓到使用者的 Email、姓名、或學校代碼（用縣市OpenID或OIDC登入時），並自動比對該欄資料，直接顯示屬於該使用者資料，無須自行輸入搜尋（故無法搜尋他人資料）。</li>
 </ol>');
-define('_MD_TADSEARCH_STYLE', '格式');
-define('_MD_TADSEARCH_STYLE_NOTE', '<ol>
+define('_MD_TADSEARCH_FORMAT', '格式');
+define('_MD_TADSEARCH_FORMAT_NOTE', '<ol>
 <li>「格式」一般是匯入前就要設定好，以便匯入正確格式，如日期或手機等。</li>
 <li>匯入後，僅「姓名」設定會有效果，若是訪客，會自動將姓名的第二個字改為 O </li>
 </ol>');
@@ -100,14 +100,14 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>開啟 MS Office 的 Excel 或 LibreOff
         <li><span class="badge bage-light bg-light text-dark">(e)</span> ：搜尋時，用來綁定登入者Email作為搜尋條件</li>
         <li><span class="badge bage-light bg-light text-dark">(n)</span> ：搜尋時，用來綁定登入者姓名作為搜尋條件</li>
         <li><span class="badge bage-light bg-light text-dark">(s)</span> ：搜尋時，用來綁定登入者學校代碼作為搜尋條件</li>
-        <li><span class="badge bage-light bg-light text-dark">(%)</span> ：搜尋時，（或）只要部份符合即可</li>
-        <li><span class="badge bage-light bg-light text-dark">(%%)</span> ：搜尋時，（且）只要部份符合即可</li>
-        <li><span class="badge bage-light bg-light text-dark">(=)</span> ：搜尋時，（或）要完全符合才行</li>
-        <li><span class="badge bage-light bg-light text-dark">(==)</span> ：搜尋時，（且）要完全符合才行</li>
+        <li><span class="badge bage-light bg-light text-dark">(%)</span> ：搜尋時，（非必填）只要部份符合即可</li>
+        <li><span class="badge bage-light bg-light text-dark">(%%)</span> ：搜尋時，（必填）只要部份符合即可</li>
+        <li><span class="badge bage-light bg-light text-dark">(=)</span> ：搜尋時，（非必填）要完全符合才行</li>
+        <li><span class="badge bage-light bg-light text-dark">(==)</span> ：搜尋時，（必填）要完全符合才行</li>
     </ul>
 </li>
-<li>同一個標題可以有一個「格式標籤」和多個「符號」，前後位置不拘。例如：
-<img src="<{$xoops_url}>/modules/<{$tad_search_dirname}>/images/demo.png" class="img-responsive img-fluid"></li>
+<li>同一個標題可以有一個「格式標籤」和多個「搜尋標籤」，前後位置不拘。例如：
+<img src="images/demo.png" class="img-responsive img-fluid"></li>
 <li>第二行起均為內容行，行數不拘，盡可能完整</li>
 <li>務必存成 xlsx 檔，檔案名稱匯入後就是專案名稱</li>
 <li>存完後，從下方表單匯入即可</li>');

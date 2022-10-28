@@ -52,8 +52,8 @@
                     <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_GROUPS_NOTE}>
                 </li>
                 <li class="w20">
-                    <{$smarty.const._MD_TADSEARCH_STYLE}>
-                    <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_STYLE_NOTE}>
+                    <{$smarty.const._MD_TADSEARCH_FORMAT}>
+                    <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_FORMAT_NOTE}>
                 </li>
             </ul>
             <{foreach from=$columns_arr key=col_title item=column }>
@@ -105,7 +105,7 @@
                     </li>
 
                     <li class="vcell light">
-                        <span class="vlabel"><{$smarty.const._MD_TADSEARCH_STYLE}></span>
+                        <span class="vlabel"><{$smarty.const._MD_TADSEARCH_FORMAT}></span>
                     </li>
                     <li class="vm c w20">
                         <select name="columns[<{$col_title}>][type]" class="form-control">
