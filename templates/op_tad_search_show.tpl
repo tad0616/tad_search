@@ -75,12 +75,19 @@
 <{if $show_result}>
     <{$BootstrapTable}>
 
-    <table data-toggle="table" data-pagination="true" data-search="true" data-mobile-responsive="true" data-title="<{$title}>">
+    <table
+    data-toggle="table"
+    data-pagination="true"
+    data-search="true"
+    data-mobile-responsive="true"
+    data-title="<{$title}>"
+    data-filter-control="true"
+    data-show-search-clear-button="true">
         <thead>
             <tr>
             <{foreach from=$heads key=k item=head}>
                 <{if $hide_col.$k!=1}>
-                <th data-field="col-<{$k}>" data-sortable="true"><{$head}></th>
+                <th data-field="col-<{$k}>" data-sortable="true"  <{if $filter_col.$k==1}>data-filter-control="select"<{/if}>><{$head}></th>
                 <{/if}>
             <{/foreach}>
             </tr>

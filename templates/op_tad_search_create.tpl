@@ -43,7 +43,11 @@
                     <{$smarty.const._MD_TADSEARCH_IS_HIDE}>
                     <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_HIDE_NOTE}>
                 </li>
-                <li class="w30">
+                <li class="w10">
+                    <{$smarty.const._MD_TADSEARCH_IS_FILTER}>
+                    <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_FILTER_NOTE}>
+                </li>
+                <li class="w20">
                     <{$smarty.const._MD_TADSEARCH_SEARCH_BY_THIS}>
                     <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_SEARCH_BY_THIS_NOTE}>
                 </li>
@@ -79,11 +83,23 @@
                         </div>
                     </li>
 
+                    <!--是否篩選-->
+                    <li class="vcell light">
+                        <span class="vlabel"><{$smarty.const._MD_TADSEARCH_IS_FILTER}></span>
+                    </li>
+                    <li class="vm c w10">
+                        <div class="form-check-inline checkbox-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="columns[<{$col_title}>][filter]" value="1" <{if $column.filter==1}>checked<{/if}>> <{$smarty.const._MD_TADSEARCH_FILTER}>
+                            </label>
+                        </div>
+                    </li>
+
                     <!--搜尋-->
                     <li class="vcell light">
                         <span class="vlabel"><{$smarty.const._MD_TADSEARCH_SEARCH}></span>
                     </li>
-                    <li class="vm c w30">
+                    <li class="vm c w20">
                         <select name="columns[<{$col_title}>][search]" class="form-control">
                             <option value="" <{if $column.search == ''}>selected<{/if}>></option>
                             <option value="and same" <{if $column.search == 'and same'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_AND_SAME}></option>

@@ -97,6 +97,7 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>Open Excel for MS Office or Calc for Li
     <ul>
         <li><span class="badge bage-light bg-light text-dark">(g)</span> : Login to see</li>
         <li><span class="badge bage-light bg-light text-dark">(h)</span> : Not shown on the screen</li>
+        <li><span class="badge bage-light bg-light text-dark">(f)</span> : Add filter</li>
         <li><span class="badge bage-light bg-light text-dark">(e)</span> : When searching, use to bind the login Email as search criteria</li>
         <li><span class="badge bage-light bg-light text-dark">(n)</span> : When searching, use to bind the login name as search criteria</li>
         <li><span class="badge bage-light bg-light text-dark">(s)</span> : When searching, use to bind the login school code as search criteria</li>

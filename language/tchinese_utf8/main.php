@@ -27,12 +27,17 @@ define('_MD_TADSEARCH_GROUPS_NOTE', '<ol>
 <li>若沒設定群組，表示訪客也可以看到該欄內容</li>
 <li>部份敏感資訊或個資建議設定可觀看群組，避免個資外洩</li>
 </ol>');
+define('_MD_TADSEARCH_HIDE', '隱藏');
 define('_MD_TADSEARCH_IS_HIDE', '是否隱藏');
 define('_MD_TADSEARCH_IS_HIDE_NOTE', '<ol>
 <li>若設成「隱藏」，將不顯示該欄位。</li>
 <li>例如：「身份證號」欄位可以用來作為搜尋欄位，但可設成「隱藏」，以確保個資安全</li>
 </ol>');
-define('_MD_TADSEARCH_HIDE', '隱藏');
+define('_MD_TADSEARCH_FILTER', '篩選');
+define('_MD_TADSEARCH_IS_FILTER', '是否篩選');
+define('_MD_TADSEARCH_IS_FILTER_NOTE', '<ol>
+<li>若設成「篩選」，將會出現下拉選單，讓使用者直接選擇欲過濾的內容。</li>
+</ol>');
 define('_MD_TADSEARCH_SEARCH', '搜尋');
 define('_MD_TADSEARCH_SEARCH_BY_THIS', '以此欄位搜尋');
 define('_MD_TADSEARCH_SEARCH_BY_THIS_NOTE', '<ol>
@@ -97,6 +102,7 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>開啟 MS Office 的 Excel 或 LibreOff
     <ul>
         <li><span class="badge bage-light bg-light text-dark">(g)</span> ：登入才能看到</li>
         <li><span class="badge bage-light bg-light text-dark">(h)</span> ：不顯示於畫面上</li>
+        <li><span class="badge bage-light bg-light text-dark">(f)</span> ：加入篩選</li>
         <li><span class="badge bage-light bg-light text-dark">(e)</span> ：搜尋時，用來綁定登入者Email作為搜尋條件</li>
         <li><span class="badge bage-light bg-light text-dark">(n)</span> ：搜尋時，用來綁定登入者姓名作為搜尋條件</li>
         <li><span class="badge bage-light bg-light text-dark">(s)</span> ：搜尋時，用來綁定登入者學校代碼作為搜尋條件</li>

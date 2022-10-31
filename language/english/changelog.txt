@@ -1,5 +1,9 @@
+tad_search 1.1 (Released 2022-11-01)
+=================================================
+1.Add filter function
+
 tad_search 1.0 (Released 2022-10-28)
- =================================================
- 1. Officially released
- 2. Just copy and modify the directory name, you can install unlimited times
- 3. With various query modes, restricted group viewable fields, automatic binding of Email, name, school code... etc.
+=================================================
+1. Officially released
+2. Just copy and modify the directory name, you can install unlimited times
+3. With various query modes, restricted group viewable fields, automatic binding of Email, name, school code... etc.

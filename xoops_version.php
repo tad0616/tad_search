@@ -75,11 +75,11 @@ if (!file_exists(XOOPS_ROOT_PATH . "/uploads/tad_search/{$tad_search_dirname}.sq
     fclose($fp);
 }
 
-if (!file_exists(XOOPS_ROOT_PATH . "/uploads/tad_search/font.ttf")) {
+if (file_exists(XOOPS_ROOT_PATH . "/modules/{$tad_search_dirname}/font.ttf") && !file_exists(XOOPS_ROOT_PATH . "/uploads/tad_search/font.ttf")) {
     copy(XOOPS_ROOT_PATH . "/modules/{$tad_search_dirname}/font.ttf", XOOPS_ROOT_PATH . "/uploads/tad_search/font.ttf");
 }
 
-if (!file_exists(XOOPS_ROOT_PATH . "/uploads/tad_search/{$tad_search_dirname}.png")) {
+if (file_exists(XOOPS_ROOT_PATH . "/modules/tad_search/images/logo.png") && !file_exists(XOOPS_ROOT_PATH . "/uploads/tad_search/{$tad_search_dirname}.png")) {
     $im = imagecreatefrompng(XOOPS_ROOT_PATH . "/modules/tad_search/images/logo.png")
     or die("Cannot Initialize new GD image stream");
     $text_color = imagecolorallocate($im, 255, 255, 255);
@@ -92,7 +92,7 @@ $modversion = [];
 
 //---模組基本資訊---//
 $modversion['name'] = $tad_search_dirname . _MI_TADSEARCH_NAME;
-$modversion['version'] = strpos(XOOPS_VERSION, '2.5.11') !== false ? '1.0.0-Stable' : '1.0';
+$modversion['version'] = strpos(XOOPS_VERSION, '2.5.11') !== false ? '1.1.0-Stable' : '1.1';
 $modversion['description'] = _MI_TADSEARCH_DESC;
 $modversion['author'] = _MI_TADSEARCH_AUTHOR;
 $modversion['credits'] = _MI_TADSEARCH_CREDITS;
@@ -102,8 +102,7 @@ $modversion['image'] = "../../uploads/tad_search/{$tad_search_dirname}.png";
 $modversion['dirname'] = $tad_search_dirname;
 
 //---模組狀態資訊---//
-$modversion['status_version'] = '1.0';
-$modversion['release_date'] = '2022-10-31';
+$modversion['release_date'] = '2022-11-01';
 $modversion['module_website_url'] = 'https://www.tad0616.net';
 $modversion['module_website_name'] = _MI_TADSEARCH_AUTHOR_WEB;
 $modversion['module_status'] = 'release';

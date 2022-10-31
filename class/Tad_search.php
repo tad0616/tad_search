@@ -162,12 +162,13 @@ class Tad_search
         $heads = $data_arr[1];
         unset($data_arr[1]);
 
-        $all_ok = $name_col = $search_col = $hide_col = [];
+        $all_ok = $name_col = $search_col = $hide_col = $filter_col = [];
 
         $ok_bind_val = $is_bind = $is_search = false;
         $search_form = [];
         foreach ($heads as $key => $col_title) {
             $hide_col[$key] = $columns_arr[$col_title]['hide'];
+            $filter_col[$key] = $columns_arr[$col_title]['filter'];
             $all_ok[$key] = empty($columns_arr[$col_title]['groups']) || array_intersect($groups, $columns_arr[$col_title]['groups']) ? 1 : 0;
             $name_col[$key] = $columns_arr[$col_title]['type'] == _MD_TADSEARCH_NAME ? 1 : 0;
             if ($columns_arr[$col_title]['search']) {
@@ -229,6 +230,7 @@ class Tad_search
         $all['name_col'] = $name_col;
         $all['search_col'] = $search_col;
         $all['hide_col'] = $hide_col;
+        $all['filter_col'] = $filter_col;
         $all['is_bind'] = $is_bind;
         $all['ok_bind_val'] = $ok_bind_val;
         $all['is_search'] = $is_search;
@@ -516,7 +518,7 @@ class Tad_search
                 }
 
                 if ($row == 1) {
-                    $clean_title = str_replace(['[d]', '[dt]', '[p]', '[t]', '[n]', '(g)', '(h)', '(e)', '(s)', '(n)', '(%)', '(=)', '(%%)', '(==)'], '', $val);
+                    $clean_title = str_replace(['[d]', '[dt]', '[p]', '[t]', '[n]', '(g)', '(h)', '(f)', '(e)', '(s)', '(n)', '(%)', '(=)', '(%%)', '(==)'], '', $val);
 
                     if (strpos($val, '[d]') !== false) {
                         $columns[$clean_title]['type'] = $type[$col] = _MD_TADSEARCH_DATE;
@@ -538,6 +540,12 @@ class Tad_search
                         $columns[$clean_title]['hide'] = 1;
                     } else {
                         $columns[$clean_title]['hide'] = 0;
+                    }
+
+                    if (strpos($val, '(f)') !== false) {
+                        $columns[$clean_title]['filter'] = 1;
+                    } else {
+                        $columns[$clean_title]['filter'] = 0;
                     }
 
                     if (strpos($val, '(e)') !== false) {
