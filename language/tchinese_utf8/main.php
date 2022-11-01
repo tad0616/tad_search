@@ -40,7 +40,7 @@ define('_MD_TADSEARCH_IS_FILTER_NOTE', '<ol>
 </ol>');
 define('_MD_TADSEARCH_SEARCH', '搜尋');
 define('_MD_TADSEARCH_SEARCH_BY_THIS', '以此欄位搜尋');
-define('_MD_TADSEARCH_SEARCH_BY_THIS_NOTE', '<ol>
+define('_MD_TADSEARCH_SEARCH_BY_THIS_NOTE', '<ol class=\'reset\'>
 <li>若有設定「以此欄位搜尋」代表需輸入該欄位的值，並依此值去搜尋出符合條件的資料。</li>
 <li>例如：成績查詢可能會輸入「學號」+「身份證號」來查詢符合條件的資料</li>
 <li>若無任何「以此欄位搜尋」，那會自動列出所有內容，並可進行任意搜尋</li>
