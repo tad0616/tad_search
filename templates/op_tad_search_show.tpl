@@ -102,7 +102,10 @@
                             <{if $name_col.$k && !$xoops_isuser }>
                                 <{$data|substr_replace:'O':3:3}>
                             <{elseif $data|substr:0:4 == "http"}>
-                                <a href="<{$data}>" target="_blank"><{$data}></>
+                                <a href="<{$data}>" target="_blank"><{$data}></a>
+                            <{elseif $data|strpos:"|http"!==false}>
+                                <{assign var=link_var value="|"|explode:$data}>
+                                <a href="<{$link_var.1}>" target="_blank"><{$link_var.0}></a>
                             <{else}>
                                 <{$data}>
                             <{/if}>

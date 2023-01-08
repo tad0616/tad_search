@@ -1,3 +1,7 @@
+tad_search 1.2 (Released 2023-01-08)
+=================================================
+1.Add custom link text function
+
 tad_search 1.1 (Released 2022-11-01)
 =================================================
 1.Add filter function

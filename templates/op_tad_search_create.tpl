@@ -159,3 +159,9 @@
         </div>
     </div>
 </form>
+
+<div class="alert alert-info">
+    <ol class="m-0">
+        <{$smarty.const._MD_TADSEARCH_IMPORT_NOTE}>
+    </ol>
+</div>

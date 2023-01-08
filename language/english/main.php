@@ -109,6 +109,8 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>Open Excel for MS Office or Calc for Li
 </li>
 <li>The same title can have one "formatting tag" and multiple "search tags", regardless of the position before or after. For example.
 <img src="images/demo.png" class="img-responsive img-fluid"></li>
+<li>If the content of the cell is a pure URL (starting with http or https), a link will be added automatically.</li>
+<li>If you want to customize the link text in the cell, you can use "Show Text|http://連結網址" to add the link to the display text automatically.</li>
 <li>The second line onwards is the content line, the number of lines is not restricted, as complete as possible</li>
 <li>Be sure to save it as an xlsx file, the file name is the project name after importing</li>
 <li>After saving, just import from the form below</li>');

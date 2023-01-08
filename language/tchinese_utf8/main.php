@@ -66,7 +66,7 @@ define('_MD_TADSEARCH_NAME', '姓名');
 
 define('_MD_TADSEARCH_NEED_LOGIN', '請先登入，登入後會自動顯示和您相關的資料');
 define('_MD_TADSEARCH_INCOMPATIBLE', '您目前的登入身份查無相關資料');
-define('_MD_TADSEARCH_NEED_KEY_IN', '請輸入以下欄位，以查尋資料');
+define('_MD_TADSEARCH_NEED_KEY_IN', '請輸入以下欄位，以查詢資料');
 
 define('_MD_TADSEARCH_EXPORT_EXCEL', '匯出 Excel');
 define('_MD_TADSEARCH_NO_VIEW_PRIVILEGES', '無觀看權限');
@@ -114,6 +114,8 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>開啟 MS Office 的 Excel 或 LibreOff
 </li>
 <li>同一個標題可以有一個「格式標籤」和多個「搜尋標籤」，前後位置不拘。例如：
 <img src="images/demo.png" class="img-responsive img-fluid"></li>
+<li>儲存格內容若是純網址（http 或 https 開頭），會自動加上連結</li>
+<li>儲存格中若欲自訂連結文字，可用「顯示文字|http://連結網址」，即可在顯示文字上，自動加上連結</li>
 <li>第二行起均為內容行，行數不拘，盡可能完整</li>
 <li>務必存成 xlsx 檔，檔案名稱匯入後就是專案名稱</li>
 <li>存完後，從下方表單匯入即可</li>');
