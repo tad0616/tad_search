@@ -110,7 +110,7 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>Open Excel for MS Office or Calc for Li
 <li>The same title can have one "formatting tag" and multiple "search tags", regardless of the position before or after. For example.
 <img src="images/demo.png" class="img-responsive img-fluid"></li>
 <li>If the content of the cell is a pure URL (starting with http or https), a link will be added automatically.</li>
-<li>If you want to customize the link text in the cell, you can use "Show Text|http://連結網址" to add the link to the display text automatically.</li>
+<li>If you want to customize the link text in the cell, you can use "Show Text<span style="color:red">|</span>https://link.to.somewhere" to add the link to the display text automatically.</li>
 <li>The second line onwards is the content line, the number of lines is not restricted, as complete as possible</li>
 <li>Be sure to save it as an xlsx file, the file name is the project name after importing</li>
 <li>After saving, just import from the form below</li>');
@@ -120,3 +120,20 @@ define('_MD_TADSEARCH_REQUIRE', 'Required field!');
 define('_MD_TADSEARCH_COMPLETE_VALUE', 'Please enter the full "%s" value');
 define('_MD_TADSEARCH_KEYWORD', 'Please enter the keyword "%s".');
 define('_MD_TADSEARCH_SELECT_GROUPS', 'Please select a group');
+define('_MD_TADSEARCH_DISPLAY_SEARCHBOX', 'Is the search box displayed?');
+define('_MD_TADSEARCH_DISPLAY_PKID', 'Is the number displayed?');
+define('_MD_TADSEARCH_URL_MODE', 'How is the web address displayed?');
+define('_MD_TADSEARCH_URL_FULL', 'Full URL');
+define('_MD_TADSEARCH_URL_SHORT', 'Short URL');
+define('_MD_TADSEARCH_URL', 'URL');
+define('_MD_TADSEARCH_VIEW_PERM', 'Who can see the data?');
+define('_MD_TADSEARCH_ADD_PERM', 'Who can add data?');
+define('_MD_TADSEARCH_MODIFY_PERM', 'Who can modify the data?');
+define('_MD_TADSEARCH_DEL_PERM', 'Who can delete data?');
+define('_MD_TADSEARCH_CAN_VIEW', 'With view permission');
+define('_MD_TADSEARCH_CAN_NOT_VIEW', 'You do not have permission to use');
+define('_MD_TADSEARCH_CAN_ADD', 'With add permission (You can modify or delete the information you have added)');
+define('_MD_TADSEARCH_CAN_MODIFY', 'have modify privilege');
+define('_MD_TADSEARCH_CAN_DEL', 'have delete privilege');
+define('_MD_TADSEARCH_DEL_DATA', 'Delete Selected Data');
+define('_MD_TADSEARCH_ADD_DATA', 'Add Data');

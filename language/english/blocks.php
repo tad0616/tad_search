@@ -17,6 +17,7 @@
  * @version    $Id $
  **/
 
+xoops_loadLanguage('main', 'tad_search');
 define('_MB_TADSEARCH_NEED_LOGIN', 'Please login first, your information will be displayed automatically after login');
 define('_MB_TADSEARCH_INCOMPATIBLE', 'No information about your current login status');
 define('_MB_TADSEARCH_NEED_KEY_IN', 'Please enter the following fields to search for information');
@@ -26,3 +27,4 @@ define('_MB_TADSEARCH_BOUND_TO', 'Display data is bound to:');
 define('_MB_TADSEARCH_REQUIRE', 'Required field!');
 define('_MB_TADSEARCH_COMPLETE_VALUE', 'Please enter the full "%s" value');
 define('_MB_TADSEARCH_KEYWORD', 'Please enter the keyword "%s".');
+define('_MB_TADSEARCH_CAN_NOT_VIEW', 'You do not have permission to use');

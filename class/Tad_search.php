@@ -1,6 +1,7 @@
 <?php
 namespace XoopsModules\Tad_search;
 
+use XoopsModules\Tadtools\Bootstrap3Editable;
 use XoopsModules\Tadtools\BootstrapTable;
 use XoopsModules\Tadtools\CkEditor;
 use XoopsModules\Tadtools\FormValidator;
@@ -29,10 +30,9 @@ use XoopsModules\Tad_search\Tools;
 
 class Tad_search
 {
-
     // 過濾用變數的設定
     public static $filter_arr = [
-        'int' => ['id', 'uid'], //數字類的欄位
+        'int' => ['id', 'uid', 'view_groups', 'add_groups', 'modify_groups', 'del_groups'], //數字類的欄位
         'html' => ['content'], //含網頁語法的欄位（所見即所得的內容）
         'text' => [], //純大量文字欄位
         'json' => ['columns'], //內容為 json 格式的欄位
@@ -138,6 +138,49 @@ class Tad_search
             $$key = $value;
         }
 
+        $TadDataCenter = new TadDataCenter($mod_name);
+        $TadDataCenter->set_col('uid_row', $id);
+        $uid = $xoopsUser ? $xoopsUser->uid() : 0;
+        if ($uid) {
+            $my_row = explode(',', $TadDataCenter->getData($uid, 0));
+            // 移除空值元素
+            $my_row = array_filter($my_row, function ($value) {
+                // 使用 empty() 檢查是否為空值
+                return !empty($value);
+            });
+            $all['my_row'] = $my_row;
+        } else {
+            $all['my_row'] = [];
+        }
+
+        $can_view = false;
+        if (Utility::power_chk('view', $id)) {
+            $can_view = true;
+        }
+        $all['can_view'] = $can_view;
+
+        $can_add = false;
+        if (Utility::power_chk('add', $id)) {
+            $can_add = true;
+        }
+        $all['can_add'] = $can_add;
+
+        $Bootstrap3EditableCode = '';
+        $can_modify = Utility::power_chk('modify', $id);
+        $xoopsTpl->assign('can_modify', $can_modify);
+        if ($can_modify || !empty($my_row)) {
+            $Bootstrap3Editable = new Bootstrap3Editable();
+            $Bootstrap3EditableCode = $Bootstrap3Editable->render('.editable', XOOPS_URL . "/modules/$mod_name/ajax.php");
+        }
+
+        $can_del = false;
+        if (Utility::power_chk('del', $id)) {
+            $can_del = true;
+        }
+        $all['can_del'] = $can_del;
+
+        $xoopsTpl->assign('Bootstrap3EditableCode', $Bootstrap3EditableCode);
+
         //將 uid 編號轉換成使用者姓名（或帳號）
         $uid_name = Tools::get_name_by_uid($uid);
         $all['uid_name'] = $uid_name;
@@ -151,7 +194,12 @@ class Tad_search
         $formValidator = new FormValidator("#searchForm{$id}", true);
         $formValidator->render();
 
-        $TadDataCenter = new TadDataCenter($mod_name);
+        $TadDataCenter->set_col('config', $id);
+        $config = $TadDataCenter->getData();
+        foreach ($config as $config_name => $config_value) {
+            $all[$config_name] = $config_value[0];
+        }
+
         $TadDataCenter->set_col('id', $id);
 
         // 目前登入者群組
@@ -224,8 +272,42 @@ class Tad_search
             }
         }
 
+        krsort($data_arr, SORT_NUMERIC);
+        // Utility::dd($data_arr);
+
+        $content_arr = [];
+        foreach ($data_arr as $key => $data) {
+            $val['pkid'] = $key;
+            foreach ($data as $k => $v) {
+                if ($hide_col[$k] != 1) {
+                    if ($all_ok[$k]) {
+                        if ($name_col[$k] && !$xoopsUser) {
+                            $v = substr_replace($v, 'O', 3, 3);
+                        } elseif (substr($v, 0, 4) == "http") {
+                            if (empty($my_row) || (!$can_modify && !in_array($key, $my_row))) {
+                                if ($url_mode == "short") {
+                                    $v = "<a href='{$v}' target='_blank'>" . _MD_TADSEARCH_URL . "</a>";
+                                } else {
+                                    $v = "<a href='{$v}' target='_blank'><{$v}></a>";
+                                }
+                            }
+                        } elseif (strpos($v, "|http") !== false) {
+                            $link_var = explode('|', $v);
+                            $v = "<a href='{$link_var[1]}' target='_blank'><{$link_var[0]}></a>";
+                        }
+                        $val[$k] = $v;
+                    } else {
+                        $val[$k] = '<span class="text-muted">' . _MD_TADSEARCH_NO_VIEW_PRIVILEGES . '</span>';
+                    }
+                }
+            }
+            $content_arr[] = $val;
+        }
+
         $all['heads'] = $heads;
         $all['contents'] = $data_arr;
+        $all['json'] = json_encode($content_arr, 256);
+        $all['total'] = count($data_arr);
         $all['all_ok'] = $all_ok;
         $all['name_col'] = $name_col;
         $all['search_col'] = $search_col;
@@ -260,7 +342,8 @@ class Tad_search
         $bind_val = $xoopsUser ? $xoopsUser->$func() : '';
         if ($bind_val) {
             foreach ($data_arr as $row => $data) {
-                if (strpos($data[$search_col_key], $bind_val) === false) {
+                // if (strpos($data[$search_col_key], $bind_val) === false) {
+                if ($data[$search_col_key] != $bind_val) {
                     unset($data_arr[$row]);
                 } else {
                     $ok_bind_val = $bind_val;
@@ -352,6 +435,24 @@ class Tad_search
         }
         $xoopsTpl->assign("group_form", $group_form);
 
+        $view_groups = new \XoopsFormSelectGroup(_MD_TADSEARCH_VIEW_PERM, "view_groups", true, Utility::get_perm($id, 'view'), 3, true);
+        $xoopsTpl->assign("view_groups", $view_groups->render());
+
+        $add_groups = new \XoopsFormSelectGroup(_MD_TADSEARCH_ADD_PERM, "add_groups", false, Utility::get_perm($id, 'add'), 3, true);
+        $xoopsTpl->assign("add_groups", $add_groups->render());
+
+        $modify_groups = new \XoopsFormSelectGroup(_MD_TADSEARCH_ADD_PERM, "modify_groups", false, Utility::get_perm($id, 'modify'), 3, true);
+        $xoopsTpl->assign("modify_groups", $modify_groups->render());
+
+        $del_groups = new \XoopsFormSelectGroup(_MD_TADSEARCH_ADD_PERM, "del_groups", false, Utility::get_perm($id, 'del'), 3, true);
+        $xoopsTpl->assign("del_groups", $del_groups->render());
+
+        $TadDataCenter = new TadDataCenter($mod_name);
+        $TadDataCenter->set_col('config', $id);
+        $config = $TadDataCenter->getData();
+        foreach ($config as $config_name => $config_value) {
+            $xoopsTpl->assign($config_name, $config_value[0]);
+        }
     }
 
     //新增資料到 tad_search 中
@@ -394,6 +495,15 @@ class Tad_search
 
         //取得最後新增資料的流水編號
         $id = $xoopsDB->getInsertId();
+
+        $TadDataCenter = new TadDataCenter($mod_name);
+        $TadDataCenter->set_col('config', $id);
+        $TadDataCenter->saveData();
+
+        Utility::save_perm($view_groups, $id, 'view');
+        Utility::save_perm($add_groups, $id, 'add');
+        Utility::save_perm($modify_groups, $id, 'modify');
+        Utility::save_perm($del_groups, $id, 'del');
 
         return $id;
     }
@@ -440,6 +550,14 @@ class Tad_search
         }
         $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
+        $TadDataCenter = new TadDataCenter($mod_name);
+        $TadDataCenter->set_col('config', $id);
+        $TadDataCenter->saveData();
+
+        Utility::save_perm($view_groups, $id, 'view');
+        Utility::save_perm($add_groups, $id, 'add');
+        Utility::save_perm($modify_groups, $id, 'modify');
+        Utility::save_perm($del_groups, $id, 'del');
         return $id;
     }
 
@@ -467,12 +585,17 @@ class Tad_search
         WHERE 1 $and";
         $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
+        Utility::del_perm($id, 'view');
+        Utility::del_perm($id, 'add');
+        Utility::del_perm($id, 'modify');
+        Utility::del_perm($id, 'del');
+
     }
 
     //匯入資料
     public static function import($id = '', $mode = '')
     {
-        global $xoopsModule;
+        global $xoopsModule, $xoopsUser;
         $mod_name = $xoopsModule->dirname();
         $TadDataCenter = new TadDataCenter($mod_name);
 
@@ -480,6 +603,9 @@ class Tad_search
         if (!empty($id)) {
             $TadDataCenter->set_col('id', $id);
             $TadDataCenter->delData();
+            $TadDataCenter->set_col('uid_row', $id);
+            $TadDataCenter->delData();
+
         } elseif (empty($id) || $mode == "store") {
             $title = $_FILES['excel_file']['name'];
             $id = self::store(['title' => substr($title, 0, -5), 'enable' => 1]);
@@ -494,7 +620,7 @@ class Tad_search
         $maxColumn = self::getIndex($maxCell['column']);
 
         // 一次讀一列
-        $xlsx_data = $columns = $type = [];
+        $xlsx_data = $columns = $type = $my_row = [];
         for ($row = 1; $row <= $maxCell['row']; $row++) {
             // 讀出每一格
             for ($col = 0; $col <= $maxColumn; $col++) {
@@ -572,12 +698,16 @@ class Tad_search
 
                 $xlsx_data[$row][$col] = $val;
             }
+            $my_row[] = $row;
         }
 
         self::update(['id' => $id], ['columns' => $columns]);
 
         $TadDataCenter->set_col('id', $id);
         $TadDataCenter->saveCustomData($xlsx_data);
+
+        $TadDataCenter->set_col('uid_row', $id);
+        $TadDataCenter->saveCustomData([$xoopsUser->uid() => [implode(',', $my_row)]]);
         return $id;
     }
 

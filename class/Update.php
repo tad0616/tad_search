@@ -24,29 +24,23 @@ namespace XoopsModules\Tad_search;
  */
 class Update
 {
-    /*
-public static function chk_1()
-{
-global $xoopsDB;
-$sql = 'SELECT count(`tag`) FROM ' . $xoopsDB->prefix('tad_search_files_center');
-$result = $xoopsDB->query($sql);
-if (empty($result)) {
-return true;
-}
 
-return false;
-}
-
-public static function go_1()
-{
-global $xoopsDB;
-$sql = 'ALTER TABLE ' . $xoopsDB->prefix('tad_search_files_center') . "
-ADD `upload_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '上傳時間',
-ADD `uid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '上傳者',
-ADD `tag` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '註記'
-";
-$xoopsDB->queryF($sql) or redirect_header(XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin', 30, $xoopsDB->error());
-}
- */
-
+    public static function update_group_permission($module)
+    {
+        global $xoopsDB;
+        $mid = $module->mid();
+        $dirname = $module->dirname();
+        $sql = 'SELECT count(*) FROM ' . $xoopsDB->prefix('group_permission') . " WHERE `gperm_modid`='$mid' and `gperm_name`='view'";
+        $result = $xoopsDB->query($sql);
+        list($count) = $xoopsDB->fetchRow($result);
+        if (empty($count)) {
+            $sql = 'SELECT `id` FROM ' . $xoopsDB->prefix($dirname) . "";
+            $result = $xoopsDB->queryF($sql);
+            while (list($id) = $xoopsDB->fetchRow($result)) {
+                $sql = 'replace into ' . $xoopsDB->prefix('group_permission') . " (`gperm_groupid`, `gperm_itemid`, `gperm_modid`, `gperm_name`) values(2, '$id', '$mid', 'view'), (3, '$id', '$mid', 'view')";
+                $xoopsDB->queryF($sql);
+            }
+        }
+        return true;
+    }
 }

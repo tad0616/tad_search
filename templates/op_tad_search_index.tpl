@@ -66,7 +66,7 @@
         <{/foreach}>
     </div>
 
-    <{if $smarty.session.tad_search_adm}>
+    <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
         <div class="text-right text-end my-3">
             <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
@@ -78,7 +78,7 @@
 
 <{else}>
     <div class="alert alert-warning text-center">
-        <{if $smarty.session.tad_search_adm}>
+        <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
             <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
             </a>

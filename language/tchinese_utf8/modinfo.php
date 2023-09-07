@@ -32,3 +32,5 @@ define('_MI_TAD_SEARCH_SHOW_BLOCK_DESC', '指定資料查詢區塊 (tad_search_s
 
 define('_MI_TAD_SEARCH_INDEX_BLOCK_NAME', '可查詢之資料');
 define('_MI_TAD_SEARCH_INDEX_BLOCK_DESC', '可查詢之資料區塊 (tad_search_index)');
+define('_MI_TADSEARCH_SINGLE_MODE', '單一模式');
+define('_MI_TADSEARCH_SINGLE_MODE_DESC', '若有填入id編號，即為單一模式（可新增完再來此處填寫）');

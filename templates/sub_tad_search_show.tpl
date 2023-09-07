@@ -1,0 +1,260 @@
+<{assign var="show_result" value=true}>
+<{assign var="show_note" value=""}>
+
+<{if $is_bind && !$ok_bind_val}>
+    <{assign var="show_result" value=false }>
+    <{if $xoops_isuser}>
+        <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_INCOMPATIBLE }>
+    <{else}>
+        <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_NEED_LOGIN}>
+    <{/if}>
+<{/if}>
+
+<{if $is_search && !$key_value}>
+    <{assign var="show_result" value=false }>
+    <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_NEED_KEY_IN}>
+<{/if}>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h2 class="my">
+            <a href="index.php?id=<{$id}>" data-toggle="tooltip" title="<{$uid_name}> last published in <{$update_date}>" class="my"><{$title}></a>
+        </h2>
+    </div>
+    <div class="col-lg-6 text-right text-end">
+        <{if $smarty.session.tad_search_adm && $show_tools}>
+            <a href="javascript:tad_search_destroy_func(<{$id}>);" class="btn btn-sm btn-danger" data-toggle="tooltip" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_create&id=<{$id}>" class="btn btn-sm btn-warning" data-toggle="tooltip" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+            <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-sm btn-primary" data-toggle="tooltip" title="<{$smarty.const._TAD_ADD}>"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
+            <{/if}>
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/excel_export.php?id=<{$id}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel-o " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
+        <{/if}>
+
+        <{if !$smarty.session.single_mode}>
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/" class="btn btn-sm btn-info" data-toggle="tooltip" title="<{$smarty.const._TAD_TO_MOD}>"><i class="fa fa-home" aria-hidden="true"></i> <{$smarty.const._TAD_TO_MOD}></a>
+        <{/if}>
+    </div>
+</div>
+<{if $can_view}>
+    <{if $content}>
+        <div class="my-border">
+            <{$content}>
+        </div>
+    <{/if}>
+
+    <{if $show_tools}>
+        <{if $can_view}>
+            <span class="mx-2"><i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_VIEW}></span>
+        <{/if}>
+
+        <{if $can_add}>
+            <span class="mx-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_ADD}></span>
+        <{/if}>
+
+        <{if $can_modify}>
+            <span class="mx-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_MODIFY}></span>
+        <{/if}>
+
+        <{if $can_del}>
+            <span class="mx-2"><i class="fa fa-trash-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_DEL}></span>
+        <{/if}>
+    <{/if}>
+
+
+    <{if $show_note}>
+        <div class="alert alert-warning p-3">
+            <h3 class="m-0"><{$show_note}></h3>
+        </div>
+    <{/if}>
+
+    <{if $is_search}>
+        <form action="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php" method="post" id="searchForm<{$id}>">
+            <div class="row">
+                <{foreach from=$search_form key=key item=col_form name=search_form}>
+                    <div class="col-md-auto my-1">
+                        <div class="input-group" data-toggle="tooltip" title="<{$col_form.placeholder}>">
+                            <div class="input-group-prepend input-group-addon">
+                                <span class="input-group-text" style="background-color: <{$col_form.color}>;"><{$col_form.title}></span>
+                            </div>
+                            <input type="text" name="key_value[<{$key}>]" class="form-control <{$col_form.require}>" placeholder="<{$col_form.placeholder}>" value="<{$key_value.$key}>">
+                        </div>
+                    </div>
+                <{/foreach}>
+                <div class="col-md-auto my-1">
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="<{$id}>">
+                        <div class="input-group-append input-group-btn">
+                            <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._TAD_SEARCH}>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <{/if}>
+
+    <{if $show_result}>
+        <{$BootstrapTable}>
+        <{if ($can_modify || $can_add || $my_row) && $show_tools}>
+            <{$Bootstrap3EditableCode}>
+        <{/if}>
+        <table
+        id="<{$table_id}>"
+        <{if ($can_modify || $can_add || $my_row) && $show_tools}>
+        data-editable-emptytext="未填"
+        data-editable-url="ajax.php"
+        data-editable-params="{op:'update_value', id:'<{$id}>'}"<{/if}>>
+        </table>
+
+        <{if ($can_del || $can_add || $my_row) && $show_tools}>
+            <button type="button" id="del_button" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_DEL_DATA}></button>
+        <{/if}>
+
+        <{if $can_add && $show_tools}>
+            <button type="button" id="add_button" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
+        <{/if}>
+
+        <script>
+            var data = <{$json}>;
+
+            var $table = $('#<{$table_id}>');
+            const myData = [<{','|implode:$my_row}>];
+
+            $(function() {
+                $table.bootstrapTable({
+                    idField: 'pkid',
+                    toggle: 'table',
+                    pagination: true,
+                    pageSize: 10,
+                    pageList: "[5, 10, 25, 50, 100, 200, All]",
+                    multipleSelectRow: true,
+                    clickToSelect: true,
+                    <{if $show_search_box}>search: true,
+                    <{if !$can_modify && !$my_row}>searchHighlight: true,<{/if}>
+                    <{else}>search: false,<{/if}>
+                    mobileResponsive: true,
+                    title: '<{$title}>',
+                    <{if $filter_col}>
+                        filterControl: true,
+                    <{/if}>
+                    control: true,
+                    hideColumn:'pkid',
+                    columns: [
+                        <{if ($can_del || $can_add) && $show_tools}>
+                        {
+                            field: 'state',
+                            title: '',
+                            checkbox: true<{if !$can_del}>,
+                            formatter:function(value, row, index) {
+                                if (myData.includes(row.pkid)) {
+                                    return {disabled:false};
+                                }
+                                return {disabled: true};
+                            }<{/if}>
+                        },
+                        <{/if}>
+                        {
+                            field: 'pkid',
+                            title: '<{$smarty.const._MD_TADSEARCH_ID}>',
+                            visible: false,
+                            sortable: true,
+                            editable: false,
+                        },
+
+                        <{foreach from=$heads key=k item=head}>
+                            {
+                                field: '<{$k}>',
+                                title: '<{$head}>',
+                                <{if $hide_col.$k!=1}>
+                                visible: true,
+                                <{else}>
+                                visible: false,
+                                <{/if}>
+                                <{if $filter_col.$k==1}>
+                                    filterControl: 'select',
+                                <{/if}>
+                                <{if ($can_modify || $can_add || $my_row) && $show_tools}>
+                                editable: {
+                                    type: 'text'<{if !$can_modify}>,
+                                    noEditFormatter: function(value, row, index) {
+                                        if (myData.includes(row.pkid)) {
+                                            return false;
+                                        }
+                                        if (value ===''){
+                                            return ' ';
+                                        }
+                                        return value
+                                    }<{/if}>
+                                },
+                                <{/if}>
+                                sortable: true
+                            },
+                        <{/foreach}>
+                        ],
+                    data: data
+                });
+            });
+
+
+            <{if ($can_add || $my_row) && $show_tools}>
+                <{assign var=newID value=$total+10}>
+
+                $('#add_button').click(function () {
+                    $.post("ajax.php",{op:'add_data', id: <{$id}>},function(pkid){
+                        $table.bootstrapTable('insertRow', {
+                            index: 0,
+                            row: {
+                                'state':'',
+                                'pkid': pkid,
+                                <{foreach from=$heads key=k item=head name=head_col}>
+                                    <{if $hide_col.$k!=1}>
+                                        '<{$k}>':'請填寫<{$head}>'<{if !$smarty.foreach.head_col.last}>,<{/if}>
+                                    <{/if}>
+                                <{/foreach}>
+                            }
+                        });
+                        // 重新載入頁面
+                        window.location.reload();
+                    });
+                });
+
+            <{/if}>
+
+            <{if ($can_del || $can_add || $my_row) && $show_tools}>
+                $('#del_button').click(function () {
+                    const myData = [<{','|implode:$my_row}>];
+                    var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                        <{if $can_del}>
+                            return row.pkid;
+                        <{else}>
+                            if (myData.includes(row.pkid)) {
+                                return row.pkid;
+                            }
+                        <{/if}>
+                    });
+
+                    $.post("ajax.php",{op:'del_data', id: <{$id}>, ids: ids<{if $can_del}>, force: 1<{/if}>},function(){
+                        $table.bootstrapTable('remove', {
+                            field: 'pkid',
+                            values: ids
+                        });
+
+                        // 重新載入頁面
+                        window.location.reload();
+                    });
+                });
+            <{/if}>
+        </script>
+
+        <{if $is_bind && $ok_bind_val}>
+            <span class="badge badge-warning bg-warning text-dark" style="font-size: 1rem; font-weight: normal;"><{$smarty.const._MD_TADSEARCH_BOUND_TO}><{$ok_bind_val}></span>
+        <{/if}>
+
+    <{/if}>
+<{else}>
+    <div class="alert alert-warning">
+        <h2><{$smarty.const._MD_TADSEARCH_CAN_NOT_VIEW}></h2>
+    </div>
+<{/if}>

@@ -115,7 +115,7 @@ define('_MD_TADSEARCH_IMPORT_NOTE', '<li>開啟 MS Office 的 Excel 或 LibreOff
 <li>同一個標題可以有一個「格式標籤」和多個「搜尋標籤」，前後位置不拘。例如：
 <img src="images/demo.png" class="img-responsive img-fluid"></li>
 <li>儲存格內容若是純網址（http 或 https 開頭），會自動加上連結</li>
-<li>儲存格中若欲自訂連結文字，可用「顯示文字|http://連結網址」，即可在顯示文字上，自動加上連結</li>
+<li>儲存格中若欲自訂連結文字，可用「顯示文字<span style="color:red">|</span>https://連結網址」，即可在顯示文字上，自動加上連結</li>
 <li>第二行起均為內容行，行數不拘，盡可能完整</li>
 <li>務必存成 xlsx 檔，檔案名稱匯入後就是專案名稱</li>
 <li>存完後，從下方表單匯入即可</li>');
@@ -125,3 +125,20 @@ define('_MD_TADSEARCH_REQUIRE', '必填！');
 define('_MD_TADSEARCH_COMPLETE_VALUE', '請輸入完整「%s」的值');
 define('_MD_TADSEARCH_KEYWORD', '請輸入「%s」的關鍵字');
 define('_MD_TADSEARCH_SELECT_GROUPS', '請選擇群組');
+define('_MD_TADSEARCH_DISPLAY_SEARCHBOX', '是否顯示搜尋框？');
+define('_MD_TADSEARCH_DISPLAY_PKID', '是否顯示流水號？');
+define('_MD_TADSEARCH_URL_MODE', '網址顯示方式？');
+define('_MD_TADSEARCH_URL_FULL', '完整網址');
+define('_MD_TADSEARCH_URL_SHORT', '簡短網址');
+define('_MD_TADSEARCH_URL', '網址');
+define('_MD_TADSEARCH_VIEW_PERM', '誰可使用此資料？');
+define('_MD_TADSEARCH_ADD_PERM', '誰可新增資料？');
+define('_MD_TADSEARCH_MODIFY_PERM', '誰可修改資料？');
+define('_MD_TADSEARCH_DEL_PERM', '誰可刪除資料？');
+define('_MD_TADSEARCH_CAN_VIEW', '有使用此資料權限');
+define('_MD_TADSEARCH_CAN_NOT_VIEW', '您沒有使用此資料的權限');
+define('_MD_TADSEARCH_CAN_ADD', '有新增權限（可修改、刪除自己新增的資料）');
+define('_MD_TADSEARCH_CAN_MODIFY', '有修改權限');
+define('_MD_TADSEARCH_CAN_DEL', '有刪除權限');
+define('_MD_TADSEARCH_DEL_DATA', '刪除選擇資料');
+define('_MD_TADSEARCH_ADD_DATA', '新增一筆');

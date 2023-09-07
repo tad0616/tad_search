@@ -16,6 +16,7 @@
  * @author     tad
  * @version    $Id $
  **/
+xoops_loadLanguage('main', 'tad_search');
 
 define('_MB_TADSEARCH_NEED_LOGIN', '請先登入，登入後會自動顯示和您相關的資料');
 define('_MB_TADSEARCH_INCOMPATIBLE', '您目前的登入身份查無相關資料');
@@ -26,3 +27,4 @@ define('_MB_TADSEARCH_BOUND_TO', '顯示資料已綁定：');
 define('_MB_TADSEARCH_REQUIRE', '必填！');
 define('_MB_TADSEARCH_COMPLETE_VALUE', '請輸入完整「%s」的值');
 define('_MB_TADSEARCH_KEYWORD', '請輸入「%s」的關鍵字');
+define('_MB_TADSEARCH_CAN_NOT_VIEW', '您沒有使用此資料的權限');

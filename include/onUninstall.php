@@ -16,14 +16,14 @@
  * @author     tad
  * @version    $Id $
  **/
-
-
-function xoops_module_uninstall_tad_search($module)
+$tad_search_dirname = basename(dirname(__DIR__));
+$function_name = "xoops_module_uninstall_{$tad_search_dirname}";
+$function_code = "
+function $function_name(\$module)
 {
-    global $xoopsDB;
-    $date = date("Ymd");
-
-    rename(XOOPS_ROOT_PATH . "/uploads/tad_search", XOOPS_ROOT_PATH . "/uploads/tad_search_bak_{$date}");
-
+    rename(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname\". XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname_bak_\".date('Ymd'));
     return true;
 }
+";
+
+eval($function_code);

@@ -93,7 +93,7 @@ $modversion = [];
 //---模組基本資訊---//
 $modversion['name'] = $tad_search_dirname . _MI_TADSEARCH_NAME;
 // $modversion['version'] = strpos(XOOPS_VERSION, '2.5.11') !== false ? '1.2.0-Stable' : '1.2';
-$modversion['version'] = '1.2';
+$modversion['version'] = '1.3';
 $modversion['description'] = _MI_TADSEARCH_DESC;
 $modversion['author'] = _MI_TADSEARCH_AUTHOR;
 $modversion['credits'] = _MI_TADSEARCH_CREDITS;
@@ -125,7 +125,12 @@ $modversion['onUpdate'] = "include/onUpdate.php";
 $modversion['onUninstall'] = "include/onUninstall.php";
 
 //---資料表架構---//
-$modversion['sqlfile']['mysql'] = "../../uploads/tad_search/{$tad_search_dirname}.sql";
+if ($tad_search_dirname == 'tad_search') {
+    $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
+} else {
+    $modversion['sqlfile']['mysql'] = "../../uploads/tad_search/{$tad_search_dirname}.sql";
+}
+
 $modversion['tables'][] = "{$tad_search_dirname}";
 $modversion['tables'][] = "{$tad_search_dirname}_data_center";
 $modversion['tables'][] = "{$tad_search_dirname}_files_center";
@@ -168,4 +173,13 @@ $modversion['blocks'][$i] = [
     'template' => 'block_tad_search_index.tpl',
     'edit_func' => $tad_search_dirname . '_index_edit',
     'options' => $tad_search_dirname,
+];
+
+$modversion['config'][] = [
+    'name' => 'single_mode',
+    'title' => '_MI_TADSEARCH_SINGLE_MODE',
+    'description' => '_MI_TADSEARCH_SINGLE_MODE_DESC',
+    'formtype' => 'textbox',
+    'valuetype' => 'int',
+    'default' => '0',
 ];

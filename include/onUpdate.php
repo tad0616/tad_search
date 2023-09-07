@@ -1,14 +1,4 @@
 <?php
-use XoopsModules\Tadtools\Utility;
-use XoopsModules\Tad_search\Update;
-
-if (!class_exists('XoopsModules\Tadtools\Utility')) {
-    require XOOPS_ROOT_PATH . '/modules/tadtools/preloads/autoloader.php';
-}
-if (!class_exists('XoopsModules\Tad_search\Update')) {
-    require dirname(__DIR__) . '/preloads/autoloader.php';
-}
-
 /**
  * Tad Search module
  *
@@ -27,12 +17,21 @@ if (!class_exists('XoopsModules\Tad_search\Update')) {
  * @version    $Id $
  **/
 
-
-function xoops_module_update_tad_search($module, $old_version)
+$tad_search_dirname = basename(dirname(__DIR__));
+$function_name = "xoops_module_update_{$tad_search_dirname}";
+// $class_name = ucfirst($tad_search_dirname);
+$function_code = "
+function $function_name(\$module, \$old_version)
 {
-    global $xoopsDB;
-
-    //if(Update::chk_1()) Update::go_1();
-
+    if(\$old_version <= 130){
+        XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname\");
+        XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/file\");
+        XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/image\");
+        XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/image/.thumbs\");
+        XoopsModules\Tad_search\Update::update_group_permission(\$module);
+    }
     return true;
 }
+";
+
+eval($function_code);

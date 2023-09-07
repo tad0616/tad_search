@@ -29,7 +29,6 @@
         </div>
     </div>
 
-    <!--可觀看群組-->
     <div class="form-group row mb-3">
         <div class="col-md-12">
             <div class="vtb">
@@ -135,7 +134,58 @@
         </div>
     </div>
 
+<div class="alert alert-warning">
+    <div class="form-group row mb-3">
+        <div class="col-md-auto">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend input-group-addon">
+                    <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_DISPLAY_SEARCHBOX}></span>
+                </div>
+                <select name="TDC[show_search_box]" id="show_search_box" class="form-control">
+                    <option value="1" <{if $show_search_box != '0'}>selected<{/if}>><{$smarty.const._YES}></option>
+                    <option value="0" <{if $show_search_box == '0'}>selected<{/if}>><{$smarty.const._NO}></option>
+                </select>
+            </div>
 
+            <div class="input-group mb-1">
+                <div class="input-group-prepend input-group-addon">
+                    <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_DISPLAY_PKID}></span>
+                </div>
+                <select name="TDC[show_pkid]" id="show_pkid" class="form-control">
+                    <option value="1" <{if $show_pkid != '0'}>selected<{/if}>><{$smarty.const._YES}></option>
+                    <option value="0" <{if $show_pkid == '0'}>selected<{/if}>><{$smarty.const._NO}></option>
+                </select>
+            </div>
+
+            <div class="input-group mb-1">
+                <div class="input-group-prepend input-group-addon">
+                    <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_URL_MODE}></span>
+                </div>
+                <select name="TDC[url_mode]" id="url_mode" class="form-control">
+                    <option value="full" <{if $url_mode != 'short'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_URL_FULL}></option>
+                    <option value="short" <{if $url_mode == 'short'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_URL_SHORT}></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-auto">
+            <label for="view_groups"><{$smarty.const._MD_TADSEARCH_VIEW_PERM}></label>
+            <{$view_groups}>
+        </div>
+        <div class="col-md-auto">
+            <label for="add_groups"><{$smarty.const._MD_TADSEARCH_ADD_PERM}></label>
+            <{$add_groups}>
+        </div>
+        <div class="col-md-auto">
+            <label for="modify_groups"><{$smarty.const._MD_TADSEARCH_MODIFY_PERM}></label>
+            <{$modify_groups}>
+        </div>
+        <div class="col-md-auto">
+            <label for="del_groups"><{$smarty.const._MD_TADSEARCH_DEL_PERM}></label>
+            <{$del_groups}>
+        </div>
+    </div>
+</div>
 
     <div class="bar text-center">
         <{$token_form}>

@@ -29,10 +29,10 @@ $tad_search_dirname = basename(dirname(__DIR__));
 
 /*-----------變數過濾----------*/
 $op = Request::getString('op');
-$id = Request::getInt('id');
+$id = Request::getInt('id', $xoopsModuleConfig['single_mode']);
 $mode = Request::getString('mode');
 $key_value = Request::getArray('key_value');
-
+$_SESSION['single_mode'] = $xoopsModuleConfig['single_mode'];
 /*-----------執行動作判斷區----------*/
 switch ($op) {
 

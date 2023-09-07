@@ -35,9 +35,7 @@ if (!function_exists('tad_search_show')) {
         $mod_name = $options[0];
         $block['mod_name'] = $mod_name;
         $block['id'] = $options[1] ? (int) $options[1] : 1;
-
         $block['content'] = Tad_search::show($mod_name, ['enable' => 1, 'id' => $block['id']], [], 'return');
-
         return $block;
     }
 }

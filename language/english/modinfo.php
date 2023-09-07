@@ -32,3 +32,5 @@ define('_MI_TAD_SEARCH_SHOW_BLOCK_DESC', 'Specify data query (tad_search_show)')
 
 define('_MI_TAD_SEARCH_INDEX_BLOCK_NAME', 'Searchable Information');
 define('_MI_TAD_SEARCH_INDEX_BLOCK_DESC', 'Searchable Information (tad_search_index)');
+define('_MI_TADSEARCH_SINGLE_MODE', 'Single Mode');
+define('_MI_TADSEARCH_SINGLE_MODE_DESC', 'If there is an id number, it is a single mode (you can come back here to fill in the form after adding a new one).');

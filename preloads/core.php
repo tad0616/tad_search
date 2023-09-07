@@ -23,21 +23,27 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access.');
  * Class Tad_searchCorePreload
  */
 if (basename(dirname(__DIR__)) !== 'tad_search') {
-    $class_name = ucfirst(basename(dirname(__DIR__))) . 'CorePreload';
-    class_alias('Tad_searchCorePreload', $class_name);
-}
+    $className = ucfirst(basename(dirname(__DIR__))) . 'CorePreload';
 
-if (!class_exists('Tad_searchCorePreload')) {
+    $classCode = "
+class $className extends XoopsPreloadItem
+{
+    public static function eventCoreIncludeCommonEnd(\$args)
+    {
+        require __DIR__ . '/autoloader.php';
+    }
+}
+";
+
+    eval($classCode);
+    // class_alias($className, 'Tad_searchCorePreload');
+} else {
     class Tad_searchCorePreload extends XoopsPreloadItem
     {
-        // to add PSR-4 autoloader
-
-        /**
-         * @param $args
-         */
         public static function eventCoreIncludeCommonEnd($args)
         {
             require __DIR__ . '/autoloader.php';
         }
     }
+
 }

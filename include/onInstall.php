@@ -1,9 +1,4 @@
 <?php
-use XoopsModules\Tadtools\Utility;
-if (!class_exists('XoopsModules\Tadtools\Utility')) {
-    require XOOPS_ROOT_PATH . '/modules/tadtools/preloads/autoloader.php';
-}
-
 /**
  * Tad Search module
  *
@@ -21,15 +16,18 @@ if (!class_exists('XoopsModules\Tadtools\Utility')) {
  * @author     tad
  * @version    $Id $
  **/
-
-
-function xoops_module_install_tad_search(&$module)
+$tad_search_dirname = basename(dirname(__DIR__));
+$function_name = "xoops_module_install_{$tad_search_dirname}";
+$function_code = "
+function $function_name(\$module)
 {
-
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_search");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_search/file");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_search/image");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_search/image/.thumbs");
+    XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname\");
+    XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/file\");
+    XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/image\");
+    XoopsModules\Tadtools\Utility::mk_dir(XOOPS_ROOT_PATH . \"/uploads/$tad_search_dirname/image/.thumbs\");
 
     return true;
 }
+";
+
+eval($function_code);

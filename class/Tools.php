@@ -1,6 +1,8 @@
 <?php
 namespace XoopsModules\Tad_search;
 
+use XoopsModules\Tadtools\Wcag;
+
 /**
  * Tad Search module
  *
@@ -24,38 +26,44 @@ namespace XoopsModules\Tad_search;
  */
 class Tools
 {
+
     // 變數過濾
-    public static function filter($key, $value, $mode = "read", $filter_arr = [], $auto_arr = true)
+    public static function filter($key, $value, $mode = "read", $filter_arr = [])
     {
         $myts = \MyTextSanitizer::getInstance();
+
+        if (isset($filter_arr['pass']) && in_array($key, $filter_arr['pass'])) {
+            return $value;
+        }
+
         if ($mode == 'write' && in_array($key, $filter_arr['json'])) {
             $value = json_encode($value, 256);
         }
 
         if (is_array($value)) {
             foreach ($value as $k => $v) {
-                $v = self::filter($k, $v, $mode, $filter_arr);
+                $v = self::filter($key, $v, $mode, $filter_arr);
                 $value[$k] = $v;
             }
         } else {
-            if (in_array($key, $filter_arr['int'], true)) {
+            if (isset($filter_arr['int']) && in_array($key, $filter_arr['int'], true)) {
                 $value = (int) $value;
-            } elseif (in_array($key, $filter_arr['html'], true)) {
+            } elseif (isset($filter_arr['html']) && in_array($key, $filter_arr['html'], true)) {
                 if ($mode == 'edit') {
                     $value = $myts->htmlSpecialChars($value);
                 } else {
-                    $value = ($mode == 'write') ? $myts->addSlashes($value) : $myts->displayTarea($value, 1, 1, 1, 1, 0);
+                    $value = ($mode == 'write') ? $myts->addSlashes(Wcag::amend(trim($value))) : $myts->displayTarea($value, 1, 1, 1, 1, 0);
                 }
-            } elseif (in_array($key, $filter_arr['text'], true)) {
+            } elseif (isset($filter_arr['text']) && in_array($key, $filter_arr['text'], true)) {
                 if ($mode == 'edit') {
                     $value = $myts->htmlSpecialChars($value);
                 } else {
-                    $value = ($mode == 'write') ? $myts->addSlashes($value) : $myts->displayTarea($value, 0, 0, 0, 1, 1);
+                    $value = ($mode == 'write') ? $myts->addSlashes(trim($value)) : $myts->displayTarea($value, 0, 0, 0, 1, 1);
                 }
-            } elseif (in_array($key, $filter_arr['json'], true)) {
+            } elseif (isset($filter_arr['json']) && in_array($key, $filter_arr['json'], true)) {
 
                 if ($mode == 'write') {
-                    $value = $myts->addSlashes($value);
+                    $value = $myts->addSlashes(trim($value));
                 } else {
                     $value = json_decode($value, true);
                     foreach ($value as $k => $v) {
@@ -63,11 +71,11 @@ class Tools
                     }
                 }
 
-            } elseif (!in_array($key, $filter_arr['pass'], true)) {
+            } elseif (!isset($filter_arr['pass']) || !in_array($key, $filter_arr['pass'], true)) {
                 if ($mode == 'edit') {
                     $value = $myts->htmlSpecialChars($value);
                 } else {
-                    $value = ($mode == 'write') ? $myts->addSlashes($value) : $myts->htmlSpecialChars($value);
+                    $value = ($mode == 'write') ? $myts->addSlashes(trim($value)) : $myts->htmlSpecialChars($value);
                 }
             }
         }
