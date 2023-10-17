@@ -285,15 +285,17 @@ class Tad_search
                             $v = substr_replace($v, 'O', 3, 3);
                         } elseif (substr($v, 0, 4) == "http") {
                             if (empty($my_row) || (!$can_modify && !in_array($key, $my_row))) {
-                                if ($url_mode == "short") {
-                                    $v = "<a href='{$v}' target='_blank'>" . _MD_TADSEARCH_URL . "</a>";
-                                } else {
-                                    $v = "<a href='{$v}' target='_blank'><{$v}></a>";
+                                if ($mode != 'edit') {
+                                    if ($all['url_mode'] == "short") {
+                                        $v = "<a href='{$v}' target='_blank'>" . _MD_TADSEARCH_URL . "</a>";
+                                    } else {
+                                        $v = "<a href='{$v}' target='_blank'>{$v}</a>";
+                                    }
                                 }
                             }
-                        } elseif (strpos($v, "|http") !== false) {
+                        } elseif (strpos($v, "|http") !== false && $mode != 'edit') {
                             $link_var = explode('|', $v);
-                            $v = "<a href='{$link_var[1]}' target='_blank'><{$link_var[0]}></a>";
+                            $v = "<a href='{$link_var[1]}' target='_blank'>{$link_var[0]}</a>";
                         }
                         $val[$k] = $v;
                     } else {

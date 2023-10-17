@@ -137,3 +137,7 @@ define('_MD_TADSEARCH_CAN_MODIFY', 'have modify privilege');
 define('_MD_TADSEARCH_CAN_DEL', 'have delete privilege');
 define('_MD_TADSEARCH_DEL_DATA', 'Delete Selected Data');
 define('_MD_TADSEARCH_ADD_DATA', 'Add Data');
+define('_MD_TADSEARCH_MODIFY_MODE', 'Enter modification mode');
+define('_MD_TADSEARCH_VIEW_MODE', 'Browsing Mode');
+define('_MD_TADSEARCH_FILL', 'Please fill in');
+define('_MD_TADSEARCH_EMPTY', 'Empty');

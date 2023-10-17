@@ -45,19 +45,19 @@
 
     <{if $show_tools}>
         <{if $can_view}>
-            <span class="mx-2"><i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_VIEW}></span>
+            <span class="mx-2 my-2"><i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_VIEW}></span>
         <{/if}>
 
         <{if $can_add}>
-            <span class="mx-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_ADD}></span>
+            <span class="mx-2 my-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_ADD}></span>
         <{/if}>
 
         <{if $can_modify}>
-            <span class="mx-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_MODIFY}></span>
+            <span class="mx-2 my-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_MODIFY}></span>
         <{/if}>
 
         <{if $can_del}>
-            <span class="mx-2"><i class="fa fa-trash-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_DEL}></span>
+            <span class="mx-2 my-2"><i class="fa fa-trash-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_DEL}></span>
         <{/if}>
     <{/if}>
 
@@ -97,24 +97,32 @@
 
     <{if $show_result}>
         <{$BootstrapTable}>
-        <{if ($can_modify || $can_add || $my_row) && $show_tools}>
+        <{if ($can_modify || $can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
             <{$Bootstrap3EditableCode}>
         <{/if}>
+
+        <{if ($can_del || $can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
+            <button type="button" id="del_button" class="btn btn-danger btn-sm my-2"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_DEL_DATA}></button>
+        <{/if}>
+
+        <{if $can_add && $show_tools && $smarty.get.mode=="edit"}>
+            <button type="button" id="add_button" class="btn btn-primary btn-sm my-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
+        <{/if}>
+
+        <{if $can_add && $show_tools && $smarty.get.mode=="edit"}>
+            <a href="index.php?id=<{$id}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
+        <{else}>
+            <a href="index.php?id=<{$id}>&mode=edit" class="btn btn-warning btn-sm my-2"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_MODIFY_MODE}></a>
+        <{/if}>
+
         <table
         id="<{$table_id}>"
-        <{if ($can_modify || $can_add || $my_row) && $show_tools}>
-        data-editable-emptytext="未填"
+        <{if ($can_modify || $can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
+        data-editable-emptytext="<{$smarty.const._MD_TADSEARCH_EMPTY}>"
         data-editable-url="ajax.php"
         data-editable-params="{op:'update_value', id:'<{$id}>'}"<{/if}>>
         </table>
 
-        <{if ($can_del || $can_add || $my_row) && $show_tools}>
-            <button type="button" id="del_button" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_DEL_DATA}></button>
-        <{/if}>
-
-        <{if $can_add && $show_tools}>
-            <button type="button" id="add_button" class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
-        <{/if}>
 
         <script>
             var data = <{$json}>;
@@ -142,7 +150,7 @@
                     control: true,
                     hideColumn:'pkid',
                     columns: [
-                        <{if ($can_del || $can_add) && $show_tools}>
+                        <{if ($can_del || $can_add) && $show_tools && $smarty.get.mode=="edit"}>
                         {
                             field: 'state',
                             title: '',
@@ -175,7 +183,7 @@
                                 <{if $filter_col.$k==1}>
                                     filterControl: 'select',
                                 <{/if}>
-                                <{if ($can_modify || $can_add || $my_row) && $show_tools}>
+                                <{if ($can_modify || $can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
                                 editable: {
                                     type: 'text'<{if !$can_modify}>,
                                     noEditFormatter: function(value, row, index) {
@@ -185,7 +193,7 @@
                                         if (value ===''){
                                             return ' ';
                                         }
-                                        return value
+                                        return value;
                                     }<{/if}>
                                 },
                                 <{/if}>
@@ -198,7 +206,7 @@
             });
 
 
-            <{if ($can_add || $my_row) && $show_tools}>
+            <{if ($can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
                 <{assign var=newID value=$total+10}>
 
                 $('#add_button').click(function () {
@@ -210,7 +218,7 @@
                                 'pkid': pkid,
                                 <{foreach from=$heads key=k item=head name=head_col}>
                                     <{if $hide_col.$k!=1}>
-                                        '<{$k}>':'請填寫<{$head}>'<{if !$smarty.foreach.head_col.last}>,<{/if}>
+                                        '<{$k}>':'<{$smarty.const._MD_TADSEARCH_FILL}><{$head}>'<{if !$smarty.foreach.head_col.last}>,<{/if}>
                                     <{/if}>
                                 <{/foreach}>
                             }

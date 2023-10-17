@@ -15,17 +15,13 @@ $force = Request::getInt('force');
 
 switch ($op) {
     case "add_data":
-        echo add_data($id);
-        break;
+        die(add_data($id));
 
     case "del_data":
-        echo del_data($id, $ids, $force);
-        break;
+        die(del_data($id, $ids, $force));
 
     case "update_value":
-        echo update_value($id, $data_name, $data_sort, $value);
-        break;
-
+        die('已修改為：' . update_value($id, $data_name, $data_sort, $value));
 }
 
 function del_data($id, $ids = [], $force = 0)

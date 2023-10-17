@@ -142,3 +142,7 @@ define('_MD_TADSEARCH_CAN_MODIFY', '有修改權限');
 define('_MD_TADSEARCH_CAN_DEL', '有刪除權限');
 define('_MD_TADSEARCH_DEL_DATA', '刪除選擇資料');
 define('_MD_TADSEARCH_ADD_DATA', '新增一筆');
+define('_MD_TADSEARCH_MODIFY_MODE', '進入修改模式');
+define('_MD_TADSEARCH_VIEW_MODE', '回瀏覽模式');
+define('_MD_TADSEARCH_FILL', '請填寫');
+define('_MD_TADSEARCH_EMPTY', '未填');

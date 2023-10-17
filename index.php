@@ -73,7 +73,7 @@ switch ($op) {
     //顯示某筆資料
     case 'tad_search_show':
         $where_arr['id'] = $id;
-        Tad_search::show($tad_search_dirname, $where_arr, $key_value);
+        Tad_search::show($tad_search_dirname, $where_arr, $key_value, $mode);
         break;
 
     //匯入Ecel資料
@@ -92,7 +92,7 @@ switch ($op) {
             $where_arr['id'] = $id;
             $where_arr['enable'] = '1';
 
-            Tad_search::show($tad_search_dirname, $where_arr, $key_value);
+            Tad_search::show($tad_search_dirname, $where_arr, $key_value, $mode);
             $op = 'tad_search_show';
         }
         break;

@@ -103,7 +103,7 @@ $modversion['image'] = "../../uploads/tad_search/{$tad_search_dirname}.png";
 $modversion['dirname'] = $tad_search_dirname;
 
 //---模組狀態資訊---//
-$modversion['release_date'] = '2022-11-01';
+$modversion['release_date'] = '2023-10-17';
 $modversion['module_website_url'] = 'https://www.tad0616.net';
 $modversion['module_website_name'] = _MI_TADSEARCH_AUTHOR_WEB;
 $modversion['module_status'] = 'release';
