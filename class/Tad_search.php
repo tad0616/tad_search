@@ -121,11 +121,13 @@ class Tad_search
     public static function show($mod_name = '', $where_arr = [], $key_value = [], $mode = "")
     {
         global $xoopsTpl, $xoopsModule, $xoopsUser;
-
         if (empty($where_arr)) {
             redirect_header($_SERVER['HTTP_REFERER'], 3, _MD_TADSEARCH_NO_QUERY_CRITERIA . __FILE__ . __LINE__);
         }
         $mod_name = empty($mod_name) ? $xoopsModule->dirname() : $mod_name;
+
+        $modhandler = &xoops_gethandler('module');
+        $xoopsModule = &$modhandler->getByDirname($mod_name);
 
         $all = self::get($mod_name, $where_arr);
         if (empty($all)) {
@@ -154,19 +156,19 @@ class Tad_search
         }
 
         $can_view = false;
-        if (Utility::power_chk('view', $id)) {
+        if (Utility::power_chk('view', $id, $xoopsModule->mid(), true, $mod_name)) {
             $can_view = true;
         }
         $all['can_view'] = $can_view;
 
         $can_add = false;
-        if (Utility::power_chk('add', $id)) {
+        if (Utility::power_chk('add', $id, $xoopsModule->mid(), true, $mod_name)) {
             $can_add = true;
         }
         $all['can_add'] = $can_add;
 
         $Bootstrap3EditableCode = '';
-        $can_modify = Utility::power_chk('modify', $id);
+        $can_modify = Utility::power_chk('modify', $id, $xoopsModule->mid(), true, $mod_name);
         $xoopsTpl->assign('can_modify', $can_modify);
         if ($can_modify || !empty($my_row)) {
             $Bootstrap3Editable = new Bootstrap3Editable();
@@ -174,7 +176,7 @@ class Tad_search
         }
 
         $can_del = false;
-        if (Utility::power_chk('del', $id)) {
+        if (Utility::power_chk('del', $id, $xoopsModule->mid(), true, $mod_name)) {
             $can_del = true;
         }
         $all['can_del'] = $can_del;

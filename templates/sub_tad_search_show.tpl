@@ -14,28 +14,35 @@
     <{assign var="show_result" value=false }>
     <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_NEED_KEY_IN}>
 <{/if}>
-
-<div class="row">
-    <div class="col-lg-6">
-        <h2 class="my">
-            <a href="index.php?id=<{$id}>" data-toggle="tooltip" title="<{$uid_name}> last published in <{$update_date}>" class="my"><{$title}></a>
-        </h2>
-    </div>
-    <div class="col-lg-6 text-right text-end">
-        <{if $smarty.session.tad_search_adm && $show_tools}>
-            <a href="javascript:tad_search_destroy_func(<{$id}>);" class="btn btn-sm btn-danger" data-toggle="tooltip" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_create&id=<{$id}>" class="btn btn-sm btn-warning" data-toggle="tooltip" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
-            <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-sm btn-primary" data-toggle="tooltip" title="<{$smarty.const._TAD_ADD}>"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
+<{if $smarty.session.tad_search_adm && $show_tools || !$smarty.session.single_mode && !$from_block}>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="my">
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>" data-toggle="tooltip" title="<{$uid_name}> last published in <{$update_date}>" class="my"><{$title}></a>
+            </h2>
+        </div>
+        <div class="col-lg-6 text-right text-end">
+            <{if $smarty.session.tad_search_adm && $show_tools}>
+                <a href="javascript:tad_search_destroy_func(<{$id}>);" class="btn btn-sm btn-danger" data-toggle="tooltip" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_create&id=<{$id}>" class="btn btn-sm btn-warning" data-toggle="tooltip" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+                <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-sm btn-primary" data-toggle="tooltip" title="<{$smarty.const._TAD_ADD}>"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
+                <{/if}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/excel_export.php?id=<{$id}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel-o " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
             <{/if}>
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/excel_export.php?id=<{$id}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel-o " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
-        <{/if}>
 
-        <{if !$smarty.session.single_mode}>
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/" class="btn btn-sm btn-info" data-toggle="tooltip" title="<{$smarty.const._TAD_TO_MOD}>"><i class="fa fa-home" aria-hidden="true"></i> <{$smarty.const._TAD_TO_MOD}></a>
-        <{/if}>
+            <{if !$smarty.session.single_mode && !$from_block }>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/" class="btn btn-sm btn-info" data-toggle="tooltip" title="<{$smarty.const._TAD_TO_MOD}>"><i class="fa fa-home" aria-hidden="true"></i> <{$smarty.const._TAD_TO_MOD}></a>
+            <{/if}>
+        </div>
     </div>
-</div>
+<{else}>
+    <h2 class="my">
+        <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>" data-toggle="tooltip" title="<{$uid_name}> last published in <{$update_date}>" class="my"><{$title}></a>
+    </h2>
+<{/if}>
+
+
 <{if $can_view}>
     <{if $content}>
         <div class="my-border">
@@ -63,6 +70,15 @@
 
 
     <{if $show_note}>
+
+        <{if $can_modify && $show_tools}>
+            <{if $smarty.get.mode=="edit"}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
+            <{else}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>&mode=edit" class="btn btn-warning btn-sm my-2"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_MODIFY_MODE}></a>
+            <{/if}>
+        <{/if}>
+
         <div class="alert alert-warning p-3">
             <h3 class="m-0"><{$show_note}></h3>
         </div>
@@ -95,7 +111,7 @@
         </form>
     <{/if}>
 
-    <{if $show_result}>
+    <{if $show_result || $smarty.get.mode=="edit"}>
         <{$BootstrapTable}>
         <{if ($can_modify || $can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
             <{$Bootstrap3EditableCode}>
@@ -109,11 +125,15 @@
             <button type="button" id="add_button" class="btn btn-primary btn-sm my-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
         <{/if}>
 
-        <{if $can_add && $show_tools && $smarty.get.mode=="edit"}>
-            <a href="index.php?id=<{$id}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
-        <{else}>
-            <a href="index.php?id=<{$id}>&mode=edit" class="btn btn-warning btn-sm my-2"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_MODIFY_MODE}></a>
+        <{if $can_modify && $show_tools}>
+            <{if $smarty.get.mode=="edit"}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
+            <{else}>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$id}>&mode=edit" class="btn btn-warning btn-sm my-2"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_MODIFY_MODE}></a>
+            <{/if}>
         <{/if}>
+
+
 
         <table
         id="<{$table_id}>"
@@ -139,10 +159,11 @@
                     pageList: "[5, 10, 25, 50, 100, 200, All]",
                     multipleSelectRow: true,
                     clickToSelect: true,
+                    mobileResponsive: true,
+                    checkOnInit: true,
                     <{if $show_search_box}>search: true,
                     <{if !$can_modify && !$my_row}>searchHighlight: true,<{/if}>
                     <{else}>search: false,<{/if}>
-                    mobileResponsive: true,
                     title: '<{$title}>',
                     <{if $filter_col}>
                         filterControl: true,
@@ -262,7 +283,9 @@
 
     <{/if}>
 <{else}>
+
     <div class="alert alert-warning">
         <h2><{$smarty.const._MD_TADSEARCH_CAN_NOT_VIEW}></h2>
     </div>
+    <{$can_view}>
 <{/if}>

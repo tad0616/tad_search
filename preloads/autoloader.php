@@ -5,10 +5,10 @@
  */
 spl_autoload_register(static function ($class) {
     // project-specific namespace prefix
-    $prefix = 'XoopsModules\\' . ucfirst(basename(dirname(__DIR__)));
+    $prefix = 'XoopsModules\\Tad_search';
 
     // base directory for the namespace prefix
-    $baseDir =  dirname(__DIR__) . '/class/';
+    $baseDir = dirname(__DIR__) . '/class/';
 
     // does the class use the namespace prefix?
     $len = mb_strlen($prefix);

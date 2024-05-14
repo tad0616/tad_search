@@ -2,6 +2,7 @@
 use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 use XoopsModules\Tad_search\Tad_search;
+
 /**
  * Tad Search module
  *

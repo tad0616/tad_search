@@ -93,7 +93,7 @@ $modversion = [];
 //---模組基本資訊---//
 $modversion['name'] = $tad_search_dirname . _MI_TADSEARCH_NAME;
 // $modversion['version'] = strpos(XOOPS_VERSION, '2.5.11') !== false ? '1.2.0-Stable' : '1.2';
-$modversion['version'] = '1.3';
+$modversion['version'] = '1.4';
 $modversion['description'] = _MI_TADSEARCH_DESC;
 $modversion['author'] = _MI_TADSEARCH_AUTHOR;
 $modversion['credits'] = _MI_TADSEARCH_CREDITS;
@@ -103,7 +103,7 @@ $modversion['image'] = "../../uploads/tad_search/{$tad_search_dirname}.png";
 $modversion['dirname'] = $tad_search_dirname;
 
 //---模組狀態資訊---//
-$modversion['release_date'] = '2023-10-17';
+$modversion['release_date'] = '2023-12-27';
 $modversion['module_website_url'] = 'https://www.tad0616.net';
 $modversion['module_website_name'] = _MI_TADSEARCH_AUTHOR_WEB;
 $modversion['module_status'] = 'release';
