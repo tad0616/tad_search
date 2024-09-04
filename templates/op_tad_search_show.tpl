@@ -1,1 +1,1 @@
-<{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tad_search_show.tpl" table_id="table`$id`" show_tools=true}>
+<{include file="$xoops_rootpath/modules/tad_search/templates/sub_tad_search_show.tpl" table_id="table`$id`" show_tools=true}>

@@ -3,7 +3,7 @@
 <{/if}>
 
 <{if $now_op}>
-    <{includeq file="$xoops_rootpath/modules/$tad_search_dirname/templates/op_`$now_op`.tpl"}>
+    <{include file="$xoops_rootpath/modules/$tad_search_dirname/templates/op_`$now_op`.tpl"}>
 <{/if}>
 
 <script language="JavaScript" type="text/javascript">

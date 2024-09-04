@@ -3,7 +3,7 @@
 
 <{if $is_bind && !$ok_bind_val}>
     <{assign var="show_result" value=false }>
-    <{if $xoops_isuser}>
+    <{if $xoops_isuser|default:false}>
         <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_INCOMPATIBLE }>
     <{else}>
         <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_NEED_LOGIN}>
@@ -228,7 +228,7 @@
 
 
             <{if ($can_add || $my_row) && $show_tools && $smarty.get.mode=="edit"}>
-                <{assign var=newID value=$total+10}>
+                <{assign var="newID" value=$total+10}>
 
                 $('#add_button').click(function () {
                     $.post("ajax.php",{op:'add_data', id: <{$id}>},function(pkid){

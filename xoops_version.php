@@ -92,8 +92,8 @@ $modversion = [];
 
 //---模組基本資訊---//
 $modversion['name'] = $tad_search_dirname . _MI_TADSEARCH_NAME;
-// $modversion['version'] = strpos(XOOPS_VERSION, '2.5.11') !== false ? '1.2.0-Stable' : '1.2';
-$modversion['version'] = '1.4';
+// $modversion['version'] = '1.4';
+$modversion['version'] = $_SESSION['xoops_version'] >= 20511 ? '2.0.0-Stable' : '2.0';
 $modversion['description'] = _MI_TADSEARCH_DESC;
 $modversion['author'] = _MI_TADSEARCH_AUTHOR;
 $modversion['credits'] = _MI_TADSEARCH_CREDITS;

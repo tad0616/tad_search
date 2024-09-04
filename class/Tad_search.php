@@ -103,8 +103,10 @@ class Tad_search
             foreach (self::$filter_arr['explode'] as $item) {
                 $data[$item . '_arr'] = explode(';', $data[$item]);
             }
-            foreach (self::$filter_arr['json'] as $item) {
-                $data[$item . '_arr'] = json_decode($data[$item], true);
+            if (\is_string($data[$item])) {
+                foreach (self::$filter_arr['json'] as $item) {
+                    $data[$item . '_arr'] = json_decode($data[$item], true);
+                }
             }
 
             $data_arr[] = $data;

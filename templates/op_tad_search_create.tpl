@@ -36,23 +36,23 @@
                     <li class="w20"><{$smarty.const._MD_TADSEARCH_COL}></li>
                     <li class="w10">
                         <{$smarty.const._MD_TADSEARCH_IS_HIDE}>
-                        <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_HIDE_NOTE}>
+                        <{include file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_HIDE_NOTE}>
                     </li>
                     <li class="w10">
                         <{$smarty.const._MD_TADSEARCH_IS_FILTER}>
-                        <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_FILTER_NOTE}>
+                        <{include file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_IS_FILTER_NOTE}>
                     </li>
                     <li class="w20">
                         <{$smarty.const._MD_TADSEARCH_SEARCH_BY_THIS}>
-                        <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_SEARCH_BY_THIS_NOTE}>
+                        <{include file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_SEARCH_BY_THIS_NOTE}>
                     </li>
                     <li class="w20">
                         <{$smarty.const._MD_TADSEARCH_GROUPS}>
-                        <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_GROUPS_NOTE}>
+                        <{include file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_GROUPS_NOTE}>
                     </li>
                     <li class="w20">
                         <{$smarty.const._MD_TADSEARCH_FORMAT}>
-                        <{includeq file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_FORMAT_NOTE}>
+                        <{include file="$xoops_rootpath/modules/tad_search/templates/sub_tip.tpl" color="success" tip=$smarty.const._MD_TADSEARCH_FORMAT_NOTE}>
                     </li>
                 </ul>
                 <{foreach from=$columns_arr key=col_title item=column }>
