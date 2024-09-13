@@ -32,10 +32,10 @@
                 <!--所有欄位-->
                 <li class="vcell light">
                     <span class="vlabel"><{$smarty.const._MD_TADSEARCH_COLUMNS}><{$smarty.const._TAD_FOR}></span>
-                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{$data.columns|@count}>
+                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns}><{$data.columns|@count}><{/if}>
                 </li>
                 <li class="vm c w30 blank">
-                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{$data.columns|@count}>
+                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns}><{$data.columns|@count}><{/if}>
                 </li>
 
                 <!--發布者-->

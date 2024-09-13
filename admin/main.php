@@ -93,9 +93,7 @@ switch ($op) {
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('now_op', $op);
 $xoopsTpl->assign('tad_search_dirname', $tad_search_dirname);
-$xoTheme->addStylesheet('/modules/tadtools/css/font-awesome/css/font-awesome.css');
-$xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SEESION['bootstrap']}.css");
-$xoTheme->addStylesheet(XOOPS_URL . "/modules/{$tad_search_dirname}/css/module.css");
+
 require_once __DIR__ . '/footer.php';
 
 /*-----------功能函數區----------*/
