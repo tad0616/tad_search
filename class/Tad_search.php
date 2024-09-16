@@ -128,8 +128,8 @@ class Tad_search
         }
         $mod_name = empty($mod_name) ? $xoopsModule->dirname() : $mod_name;
 
-        $modhandler = &xoops_gethandler('module');
-        $xoopsModule = &$modhandler->getByDirname($mod_name);
+        $modhandler = xoops_gethandler('module');
+        $xoopsModule = $modhandler->getByDirname($mod_name);
 
         $all = self::get($mod_name, $where_arr);
         if (empty($all)) {
@@ -219,8 +219,8 @@ class Tad_search
         $ok_bind_val = $is_bind = $is_search = false;
         $search_form = [];
         foreach ($heads as $key => $col_title) {
-            $hide_col[$key] = $columns_arr[$col_title]['hide'];
-            $filter_col[$key] = $columns_arr[$col_title]['filter'];
+            $hide_col[$key] = isset($columns_arr[$col_title]['hide']) ? $columns_arr[$col_title]['hide'] : 0;
+            $filter_col[$key] = isset($columns_arr[$col_title]['filter']) ? $columns_arr[$col_title]['filter'] : 0;
             $all_ok[$key] = empty($columns_arr[$col_title]['groups']) || array_intersect($groups, $columns_arr[$col_title]['groups']) ? 1 : 0;
             $name_col[$key] = $columns_arr[$col_title]['type'] == _MD_TADSEARCH_NAME ? 1 : 0;
             if ($columns_arr[$col_title]['search']) {

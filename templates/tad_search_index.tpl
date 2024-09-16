@@ -2,7 +2,7 @@
 <{$toolbar}>
 <{/if}>
 
-<{if $now_op}>
+<{if $now_op|default:false}>
     <{include file="$xoops_rootpath/modules/$tad_search_dirname/templates/op_`$now_op`.tpl"}>
 <{/if}>
 

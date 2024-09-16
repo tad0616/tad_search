@@ -1,4 +1,4 @@
-<{if $all_tad_search}>
+<{if $all_tad_search|default:false}>
     <div class="vtb mt-4">
         <ul id="tad_search_sort" class="vhead">
             <!--標題-->
@@ -9,7 +9,7 @@
             <li class="w10"><{$smarty.const._MD_TADSEARCH_UID}></li>
             <!--最後更新日期-->
             <li class="w20"><{$smarty.const._MD_TADSEARCH_UPDATE_DATE}></li>
-            <{if $smarty.session.tad_search_adm}>
+            <{if $smarty.session.tad_search_adm|default:false}>
                 <li class="w10"><{$smarty.const._TAD_FUNCTION}></li>
             <{/if}>
         </ul>
@@ -32,10 +32,10 @@
                 <!--所有欄位-->
                 <li class="vcell light">
                     <span class="vlabel"><{$smarty.const._MD_TADSEARCH_COLUMNS}><{$smarty.const._TAD_FOR}></span>
-                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns}><{$data.columns|@count}><{/if}>
+                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns|default:false}><{$data.columns|@count}><{/if}>
                 </li>
                 <li class="vm c w30 blank">
-                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns}><{$data.columns|@count}><{/if}>
+                    <{$smarty.const._MD_TADSEARCH_NUMBER_OF_COLUMNS}><{if $data.columns|default:false}><{$data.columns|@count}><{/if}>
                 </li>
 
                 <!--發布者-->
@@ -56,7 +56,7 @@
                     <{$data.update_date}>
                 </li>
 
-                <{if $smarty.session.tad_search_adm}>
+                <{if $smarty.session.tad_search_adm|default:false}>
                     <li class="vm c w10">
                         <a href="javascript:tad_search_destroy_func(<{$data.id}>);" class="btn btn-sm btn-xs btn-danger" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-trash-o"></i></a>
                         <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_create&id=<{$data.id}>" class="btn btn-sm btn-xs btn-warning" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil"></i></a>
@@ -66,7 +66,7 @@
         <{/foreach}>
     </div>
 
-    <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
+    <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
         <div class="text-right text-end my-3">
             <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
@@ -78,7 +78,7 @@
 
 <{else}>
     <div class="alert alert-warning text-center">
-        <{if $smarty.session.tad_search_adm && $smarty.session.single_mode==0}>
+        <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
             <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
             </a>
