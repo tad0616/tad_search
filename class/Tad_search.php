@@ -101,10 +101,13 @@ class Tad_search
             }
 
             foreach (self::$filter_arr['explode'] as $item) {
-                $data[$item . '_arr'] = explode(';', $data[$item]);
+                if (isset($data[$item])) {
+                    $data[$item . '_arr'] = explode(';', $data[$item]);
+                }
             }
-            if (\is_string($data[$item])) {
-                foreach (self::$filter_arr['json'] as $item) {
+
+            foreach (self::$filter_arr['json'] as $item) {
+                if (isset($data[$item]) && is_string($data[$item])) {
                     $data[$item . '_arr'] = json_decode($data[$item], true);
                 }
             }
@@ -132,6 +135,7 @@ class Tad_search
         $xoopsModule = $modhandler->getByDirname($mod_name);
 
         $all = self::get($mod_name, $where_arr);
+
         if (empty($all)) {
             return false;
         }
@@ -222,8 +226,8 @@ class Tad_search
             $hide_col[$key] = isset($columns_arr[$col_title]['hide']) ? $columns_arr[$col_title]['hide'] : 0;
             $filter_col[$key] = isset($columns_arr[$col_title]['filter']) ? $columns_arr[$col_title]['filter'] : 0;
             $all_ok[$key] = empty($columns_arr[$col_title]['groups']) || array_intersect($groups, $columns_arr[$col_title]['groups']) ? 1 : 0;
-            $name_col[$key] = $columns_arr[$col_title]['type'] == _MD_TADSEARCH_NAME ? 1 : 0;
-            if ($columns_arr[$col_title]['search']) {
+            $name_col[$key] = (isset($columns_arr[$col_title]['type']) && $columns_arr[$col_title]['type']) == _MD_TADSEARCH_NAME ? 1 : 0;
+            if (isset($columns_arr[$col_title]['search']) && $columns_arr[$col_title]['search']) {
                 $search_col[$key] = $columns_arr[$col_title]['search'];
 
                 // 偵測有無綁定
@@ -380,10 +384,14 @@ class Tad_search
         $data = $xoopsDB->fetchArray($result);
 
         foreach (self::$filter_arr['explode'] as $item) {
-            $data[$item . '_arr'] = explode(';', $data[$item]);
+            if (isset($data[$item])) {
+                $data[$item . '_arr'] = explode(';', $data[$item]);
+            }
         }
         foreach (self::$filter_arr['json'] as $item) {
-            $data[$item . '_arr'] = json_decode($data[$item], true);
+            if (isset($data[$item])) {
+                $data[$item . '_arr'] = json_decode($data[$item], true);
+            }
         }
 
         return $data;

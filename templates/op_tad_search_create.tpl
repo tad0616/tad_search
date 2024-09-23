@@ -2,7 +2,7 @@
 
     <div class="form-group row mb-3">
         <div class="col-md-8">
-            <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$title}>" placeholder="<{$smarty.const._MD_TADSEARCH_TITLE}>">
+            <input type="text" name="title" id="title" class="form-control validate[required]" value="<{$title|default:''}>" placeholder="<{$smarty.const._MD_TADSEARCH_TITLE}>">
         </div>
 
         <!--是否啟用-->
@@ -25,7 +25,7 @@
     <!--說明-->
     <div class="form-group row mb-3">
         <div class="col-md-12">
-            <{$content_editor}>
+            <{$content_editor|default:''}>
         </div>
     </div>
 
@@ -60,10 +60,10 @@
 
                         <!--欄位-->
                         <li class="vcell ">
-                            <{$col_title}> <{$smarty.const._MD_TADSEARCH_COLUMN_SETUP}>
+                            <{$col_title|default:''}> <{$smarty.const._MD_TADSEARCH_COLUMN_SETUP}>
                         </li>
                         <li class="vm w20 blank">
-                            <{$col_title}>
+                            <{$col_title|default:''}>
                         </li>
 
                         <!--是否隱藏-->
@@ -73,7 +73,7 @@
                         <li class="vm c w10">
                             <div class="form-check-inline checkbox-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="columns[<{$col_title}>][hide]" value="1" <{if $column.hide==1}>checked<{/if}>> <{$smarty.const._MD_TADSEARCH_HIDE}>
+                                    <input class="form-check-input" type="checkbox" name="columns[<{$col_title|default:''}>][hide]" value="1" <{if $column.hide==1}>checked<{/if}>> <{$smarty.const._MD_TADSEARCH_HIDE}>
                                 </label>
                             </div>
                         </li>
@@ -85,7 +85,7 @@
                         <li class="vm c w10">
                             <div class="form-check-inline checkbox-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="columns[<{$col_title}>][filter]" value="1" <{if $column.filter==1}>checked<{/if}>> <{$smarty.const._MD_TADSEARCH_FILTER}>
+                                    <input class="form-check-input" type="checkbox" name="columns[<{$col_title|default:''}>][filter]" value="1" <{if $column.filter==1}>checked<{/if}>> <{$smarty.const._MD_TADSEARCH_FILTER}>
                                 </label>
                             </div>
                         </li>
@@ -95,7 +95,7 @@
                             <span class="vlabel"><{$smarty.const._MD_TADSEARCH_SEARCH}></span>
                         </li>
                         <li class="vm c w20">
-                            <select name="columns[<{$col_title}>][search]" class="form-control">
+                            <select name="columns[<{$col_title|default:''}>][search]" class="form-control">
                                 <option value="" <{if $column.search == ''}>selected<{/if}>></option>
                                 <option value="and same" <{if $column.search == 'and same'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_AND_SAME}></option>
                                 <option value="or same" <{if $column.search == 'or same'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_OR_SAME}></option>
@@ -119,7 +119,7 @@
                             <span class="vlabel"><{$smarty.const._MD_TADSEARCH_FORMAT}></span>
                         </li>
                         <li class="vm c w20">
-                            <select name="columns[<{$col_title}>][type]" class="form-control">
+                            <select name="columns[<{$col_title|default:''}>][type]" class="form-control">
                                 <option value="" <{if $column.type == ''}>selected<{/if}>></option>
                                 <option value="<{$smarty.const._MD_TADSEARCH_DATE}>" <{if $column.type == $smarty.const._MD_TADSEARCH_DATE}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_DATE}></option>
                                 <option value="<{$smarty.const._MD_TADSEARCH_DATETIME}>" <{if $column.type == $smarty.const._MD_TADSEARCH_DATETIME}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_DATETIME}></option>
@@ -170,28 +170,28 @@
 
         <div class="col-md-auto">
             <label for="view_groups"><{$smarty.const._MD_TADSEARCH_VIEW_PERM}></label>
-            <{$view_groups}>
+            <{$view_groups|default:''}>
         </div>
         <div class="col-md-auto">
             <label for="add_groups"><{$smarty.const._MD_TADSEARCH_ADD_PERM}></label>
-            <{$add_groups}>
+            <{$add_groups|default:''}>
         </div>
         <div class="col-md-auto">
             <label for="modify_groups"><{$smarty.const._MD_TADSEARCH_MODIFY_PERM}></label>
-            <{$modify_groups}>
+            <{$modify_groups|default:''}>
         </div>
         <div class="col-md-auto">
             <label for="del_groups"><{$smarty.const._MD_TADSEARCH_DEL_PERM}></label>
-            <{$del_groups}>
+            <{$del_groups|default:''}>
         </div>
     </div>
 </div>
 
     <div class="bar text-center">
-        <{$token_form}>
-        <input type='hidden' name="uid" value="<{$uid}>">
-        <input type="hidden" name="op" value="<{$next_op}>">
-        <input type="hidden" name="id" value="<{$id}>">
+        <{$token_form|default:''}>
+        <input type='hidden' name="uid" value="<{$uid|default:''}>">
+        <input type="hidden" name="op" value="<{$next_op|default:''}>">
+        <input type="hidden" name="id" value="<{$id|default:''}>">
 
         <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
     </div>
@@ -204,7 +204,7 @@
         <input type="file" name="excel_file" id="excel_file" maxlength="1" accept=".xlsx" class="form-control">
         <div class="input-group-append input-group-btn">
             <input type="hidden" name="op" value="tad_search_import">
-            <input type="hidden" name="id" value="<{$id}>">
+            <input type="hidden" name="id" value="<{$id|default:''}>">
             <button type="submit" class="btn btn-primary"><{$smarty.const._MD_TADSEARCH_IMPORT}></button>
         </div>
     </div>

@@ -21,11 +21,11 @@
                 </li>
                 <li class="vm w30">
                     <{if $data.enable == '1'}>
-                        <img src="<{$xoops_url}>/modules/<{$tad_search_dirname}>/images/yes.gif" alt="<{$smarty.const._YES}>" title="<{$smarty.const._TAD_ENABLE}>">
+                        <img src="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/images/yes.gif" alt="<{$smarty.const._YES}>" title="<{$smarty.const._TAD_ENABLE}>">
                     <{else}>
-                        <img src="<{$xoops_url}>/modules/<{$tad_search_dirname}>/images/no.gif" alt="<{$smarty.const._NO}>" title="<{$smarty.const._TAD_UNABLE}>">
+                        <img src="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/images/no.gif" alt="<{$smarty.const._NO}>" title="<{$smarty.const._TAD_UNABLE}>">
                     <{/if}>
-                    <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?id=<{$data.id}>"><{$data.title}></a>
+                    <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?id=<{$data.id}>"><{$data.title}></a>
                 </li>
 
 
@@ -41,10 +41,10 @@
                 <!--發布者-->
                 <li class="vcell light">
                     <span class="vlabel"><{$smarty.const._MD_TADSEARCH_UID}><{$smarty.const._TAD_FOR}></span>
-                    <a href="<{$xoops_user}>/user.php?uid=<{$data.uid}>"><{$data.uid_name}></a>
+                    <a href="<{$xoops_user|default:''}>/user.php?uid=<{$data.uid}>"><{$data.uid_name}></a>
                 </li>
                 <li class="vm c w10 blank">
-                    <a href="<{$xoops_user}>/user.php?uid=<{$data.uid}>"><{$data.uid_name}></a>
+                    <a href="<{$xoops_user|default:''}>/user.php?uid=<{$data.uid}>"><{$data.uid_name}></a>
                 </li>
 
                 <!--最後更新日期-->
@@ -59,7 +59,7 @@
                 <{if $smarty.session.tad_search_adm|default:false}>
                     <li class="vm c w10">
                         <a href="javascript:tad_search_destroy_func(<{$data.id}>);" class="btn btn-sm btn-xs btn-danger" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-trash-o"></i></a>
-                        <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_create&id=<{$data.id}>" class="btn btn-sm btn-xs btn-warning" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil"></i></a>
+                        <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_create&id=<{$data.id}>" class="btn btn-sm btn-xs btn-warning" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil"></i></a>
                     </li>
                 <{/if}>
             </ul>
@@ -68,18 +68,18 @@
 
     <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
         <div class="text-right text-end my-3">
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
             </a>
         </div>
     <{/if}>
 
-    <div class="bar"><{$bar}></div>
+    <div class="bar"><{$bar|default:''}></div>
 
 <{else}>
     <div class="alert alert-warning text-center">
         <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
-            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname}>/index.php?op=tad_search_add" class="btn btn-info">
+            <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_add" class="btn btn-info">
                 <i class="fa fa-plus"></i> <{$smarty.const._TAD_ADD}>
             </a>
         <{else}>

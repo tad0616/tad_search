@@ -1,5 +1,5 @@
 <{if $smarty.session.single_mode == 0}>
-<{$toolbar}>
+<{$toolbar|default:''}>
 <{/if}>
 
 <{if $now_op|default:false}>
