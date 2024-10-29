@@ -23,7 +23,7 @@ $objPHPExcel = new PHPExcel(); //實體化Excel
 $title = "{$search['title']}-" . date("Y-m-d-H-i-s");
 $objPHPExcel->setActiveSheetIndex(0); //設定預設顯示的工作表
 $objActSheet = $objPHPExcel->getActiveSheet(); //指定預設工作表為 $objActSheet
-$objActSheet->setTitle($title); //設定標題
+$objActSheet->setTitle($search['title']); //設定標題
 $objPHPExcel->createSheet(); //建立新的工作表，上面那三行再來一次，編號要改
 
 // 抓出標題資料

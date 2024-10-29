@@ -100,7 +100,7 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu));
+$xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu, false, $interface_icon));
 $xoopsTpl->assign('now_op', $op);
 $xoopsTpl->assign('tad_search_dirname', $tad_search_dirname);
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/{$tad_search_dirname}/css/module.css");

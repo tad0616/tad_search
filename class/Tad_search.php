@@ -497,15 +497,10 @@ class Tad_search
             `uid`,
             `update_date`,
             `enable`
-        ) VALUES(
-            '{$title}',
-            '{$content}',
-            '{$columns}',
-            '{$uid}',
-            '{$update_date}',
-            '{$enable}'
-        )";
-        $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+        ) VALUES (?, ?, ?, ?, ?, ?)";
+        $params = [$title, $content, $columns, $uid, $update_date, $enable];
+
+        Utility::query($sql, 'sssiss', $params) or Utility::web_error($sql, __FILE__, __LINE__);
 
         //取得最後新增資料的流水編號
         $id = $xoopsDB->getInsertId();

@@ -129,41 +129,6 @@ class Tools
         }
     }
 
-    // 建立群組
-    public static function mk_group($name = "")
-    {
-        global $xoopsDB;
-        $sql = "select groupid from " . $xoopsDB->prefix("groups") . " where `name`='$name'";
-        $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
-
-        list($group_id) = $xoopsDB->fetchRow($result);
-
-        if (empty($group_id)) {
-            $sql = "insert into " . $xoopsDB->prefix("groups") . " (`name`) values('{$name}')";
-            $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
-
-            //取得最後新增資料的流水編號
-            $group_id = $xoopsDB->getInsertId();
-        }
-        return $group_id;
-    }
-
-    // 將某人加入群組
-    public static function add_user_to_group($uid, $group_id)
-    {
-        global $xoopsDB;
-        $sql = "replace into " . $xoopsDB->prefix("groups_users_link") . " (`groupid`,`uid`) values('$group_id','$uid')";
-        $xoopsDB->queryF($sql) or die($sql);
-    }
-
-    // 將某人移出群組
-    public static function del_user_from_group($uid, $group_id)
-    {
-        global $xoopsDB;
-        $sql = "delete from " . $xoopsDB->prefix("groups_users_link") . " where `groupid`='$group_id' and `uid`='$uid'";
-        $xoopsDB->queryF($sql) or die($sql);
-    }
-
     // uid 轉姓名
     public static function get_name_by_uid($uid)
     {

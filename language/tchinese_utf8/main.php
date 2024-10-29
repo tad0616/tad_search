@@ -146,3 +146,4 @@ define('_MD_TADSEARCH_MODIFY_MODE', '進入修改模式');
 define('_MD_TADSEARCH_VIEW_MODE', '回瀏覽模式');
 define('_MD_TADSEARCH_FILL', '請填寫');
 define('_MD_TADSEARCH_EMPTY', '未填');
+define('_MD_TADSEARCH_INDEX', '查詢系統');

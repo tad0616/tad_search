@@ -89,6 +89,7 @@ if (file_exists(XOOPS_ROOT_PATH . "/modules/tad_search/images/logo.png") && !fil
 }
 
 $modversion = [];
+global $xoopsConfig;
 
 //---模組基本資訊---//
 $modversion['name'] = $tad_search_dirname . _MI_TADSEARCH_NAME;
@@ -113,11 +114,12 @@ $modversion['min_php'] = '5.4';
 $modversion['min_xoops'] = '2.5';
 
 //---paypal資訊---//
-$modversion['paypal'] = [];
-$modversion['paypal']['business'] = 'tad0616@gmail.com';
-$modversion['paypal']['item_name'] = 'Donation :' . _MI_TADSEARCH_AUTHOR;
-$modversion['paypal']['amount'] = 0;
-$modversion['paypal']['currency_code'] = 'USD';
+$modversion['paypal'] = [
+    'business' => 'tad0616@gmail.com',
+    'item_name' => 'Donation : ' . _MI_TAD_WEB,
+    'amount' => 0,
+    'currency_code' => 'USD',
+];
 
 //---安裝設定---//
 $modversion['onInstall'] = "include/onInstall.php";
@@ -131,9 +133,11 @@ if ($tad_search_dirname == 'tad_search') {
     $modversion['sqlfile']['mysql'] = "../../uploads/tad_search/{$tad_search_dirname}.sql";
 }
 
-$modversion['tables'][] = "{$tad_search_dirname}";
-$modversion['tables'][] = "{$tad_search_dirname}_data_center";
-$modversion['tables'][] = "{$tad_search_dirname}_files_center";
+$modversion['tables'] = [
+    "{$tad_search_dirname}",
+    "{$tad_search_dirname}_data_center",
+    "{$tad_search_dirname}_files_center",
+];
 
 //---後台使用系統選單---//
 $modversion['system_menu'] = 1;
@@ -147,34 +151,34 @@ $modversion['adminmenu'] = 'admin/menu.php';
 $modversion['hasMain'] = 1;
 
 //---樣板設定---//
-$modversion['templates'][] = array('file' => 'tad_search_adm_main.tpl', 'description' => 'tad_search_adm_main.tpl');
-$modversion['templates'][] = array('file' => 'tad_search_index.tpl', 'description' => 'tad_search_index.tpl');
+$modversion['templates'] = [
+    ['file' => 'tad_search_admin.tpl', 'description' => 'tad_search_admin.tpl'],
+    ['file' => 'tad_search_index.tpl', 'description' => 'tad_search_index.tpl'],
+];
 
 //---區塊設定---//
-$i = 0;
-$i++;
-
-$modversion['blocks'][$i] = [
-    'file' => 'tad_search_show.php',
-    'name' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_NAME,
-    'description' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_DESC,
-    'show_func' => $tad_search_dirname . '_show',
-    'template' => 'block_tad_search_show.tpl',
-    'edit_func' => $tad_search_dirname . '_show_edit',
-    'options' => "{$tad_search_dirname}|",
+$modversion['blocks'] = [
+    [
+        'file' => 'tad_search_show.php',
+        'name' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_NAME,
+        'description' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_DESC,
+        'show_func' => $tad_search_dirname . '_show',
+        'template' => 'block_tad_search_show.tpl',
+        'edit_func' => $tad_search_dirname . '_show_edit',
+        'options' => "{$tad_search_dirname}|",
+    ],
+    [
+        'file' => 'tad_search_index.php',
+        'name' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_NAME,
+        'description' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_DESC,
+        'show_func' => $tad_search_dirname . '_index',
+        'template' => 'block_tad_search_index.tpl',
+        'edit_func' => $tad_search_dirname . '_index_edit',
+        'options' => $tad_search_dirname,
+    ],
 ];
 
-$i++;
-$modversion['blocks'][$i] = [
-    'file' => 'tad_search_index.php',
-    'name' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_NAME,
-    'description' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_DESC,
-    'show_func' => $tad_search_dirname . '_index',
-    'template' => 'block_tad_search_index.tpl',
-    'edit_func' => $tad_search_dirname . '_index_edit',
-    'options' => $tad_search_dirname,
-];
-
+//---偏好設定---//
 $modversion['config'][] = [
     'name' => 'single_mode',
     'title' => '_MI_TADSEARCH_SINGLE_MODE',
