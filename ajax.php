@@ -4,6 +4,8 @@ use XoopsModules\Tadtools\TadDataCenter;
 use XoopsModules\Tadtools\Utility;
 
 include_once "header.php";
+$xoopsLogger->activated = false;
+header('HTTP/1.1 200 OK');
 
 $op = Request::getString('op');
 $id = Request::getInt('id');
@@ -12,7 +14,6 @@ $data_name = Request::getInt('pk');
 $data_sort = Request::getInt('name');
 $value = Request::getString('value');
 $force = Request::getInt('force');
-header('HTTP/1.1 200 OK');
 
 switch ($op) {
     case "add_data":
