@@ -104,14 +104,14 @@ $modversion['image'] = "../../uploads/tad_search/{$tad_search_dirname}.png";
 $modversion['dirname'] = $tad_search_dirname;
 
 //---模組狀態資訊---//
-$modversion['release_date'] = '2023-12-27';
+$modversion['release_date'] = '2024-11-11';
 $modversion['module_website_url'] = 'https://www.tad0616.net';
 $modversion['module_website_name'] = _MI_TADSEARCH_AUTHOR_WEB;
 $modversion['module_status'] = 'release';
 $modversion['author_website_url'] = 'https://www.tad0616.net';
 $modversion['author_website_name'] = _MI_TADSEARCH_AUTHOR_WEB;
 $modversion['min_php'] = '5.4';
-$modversion['min_xoops'] = '2.5';
+$modversion['min_xoops'] = '2.5.10';
 
 //---paypal資訊---//
 $modversion['paypal'] = [

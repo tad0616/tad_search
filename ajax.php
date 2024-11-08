@@ -5,7 +5,6 @@ use XoopsModules\Tadtools\Utility;
 
 include_once "header.php";
 $xoopsLogger->activated = false;
-header('HTTP/1.1 200 OK');
 
 $op = Request::getString('op');
 $id = Request::getInt('id');
