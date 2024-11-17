@@ -156,9 +156,9 @@ $modversion['templates'] = [
     ['file' => 'tad_search_index.tpl', 'description' => 'tad_search_index.tpl'],
 ];
 
-//---區塊設定---//
+//---區塊設定 (索引為固定值，若欲刪除區塊記得補上索引，避免區塊重複)---//
 $modversion['blocks'] = [
-    [
+    1 => [
         'file' => 'tad_search_show.php',
         'name' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_NAME,
         'description' => $tad_search_dirname . _MI_TAD_SEARCH_SHOW_BLOCK_DESC,
@@ -167,7 +167,7 @@ $modversion['blocks'] = [
         'edit_func' => $tad_search_dirname . '_show_edit',
         'options' => "{$tad_search_dirname}|",
     ],
-    [
+    2 => [
         'file' => 'tad_search_index.php',
         'name' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_NAME,
         'description' => $tad_search_dirname . _MI_TAD_SEARCH_INDEX_BLOCK_DESC,
