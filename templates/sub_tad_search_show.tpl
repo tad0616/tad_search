@@ -28,7 +28,7 @@
                 <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_add" class="btn btn-sm btn-primary" data-toggle="tooltip" title="<{$smarty.const._TAD_ADD}>"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
                 <{/if}>
-                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/excel_export.php?id=<{$id|default:''}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel-o " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
+                <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/excel_export.php?id=<{$id|default:''}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
             <{/if}>
 
             <{if !$smarty.session.single_mode|default:false && !$from_block }>
@@ -52,19 +52,19 @@
 
     <{if $show_tools|default:false}>
         <{if $can_view|default:false}>
-            <span class="mx-2 my-2"><i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_VIEW}></span>
+            <span class="mx-2 my-2"><i class="fa fa-magnifying-glass" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_VIEW}></span>
         <{/if}>
 
         <{if $can_add|default:false}>
-            <span class="mx-2 my-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_ADD}></span>
+            <span class="mx-2 my-2"><i class="fa fa-square-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_ADD}></span>
         <{/if}>
 
         <{if $can_modify|default:false}>
-            <span class="mx-2 my-2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_MODIFY}></span>
+            <span class="mx-2 my-2"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_MODIFY}></span>
         <{/if}>
 
         <{if $can_del|default:false}>
-            <span class="mx-2 my-2"><i class="fa fa-trash-o" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_DEL}></span>
+            <span class="mx-2 my-2"><i class="fa fa-trash" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_CAN_DEL}></span>
         <{/if}>
     <{/if}>
 
@@ -102,7 +102,7 @@
                         <input type="hidden" name="id" value="<{$id|default:''}>">
                         <div class="input-group-append input-group-btn">
                             <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-search" aria-hidden="true"></i> <{$smarty.const._TAD_SEARCH}>
+                            <i class="fa fa-magnifying-glass" aria-hidden="true"></i> <{$smarty.const._TAD_SEARCH}>
                             </button>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
         <{/if}>
 
         <{if $can_add && $show_tools && (isset($smarty.get.mode) && $smarty.get.mode=="edit")}>
-            <button type="button" id="add_button" class="btn btn-primary btn-sm my-2"><i class="fa fa-plus-square" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
+            <button type="button" id="add_button" class="btn btn-primary btn-sm my-2"><i class="fa fa-square-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
         <{/if}>
 
         <{if $can_modify && $show_tools}>

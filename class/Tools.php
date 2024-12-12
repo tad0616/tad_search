@@ -129,14 +129,4 @@ class Tools
         }
     }
 
-    // uid 轉姓名
-    public static function get_name_by_uid($uid)
-    {
-        $uid_name = \XoopsUser::getUnameFromId($uid, 1);
-        if (empty($uid_name)) {
-            $uid_name = \XoopsUser::getUnameFromId($uid, 0);
-        }
-
-        return $uid_name;
-    }
 }

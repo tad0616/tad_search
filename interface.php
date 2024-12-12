@@ -5,4 +5,4 @@ if (!isset($_SESSION['tad_search_adm'])) {
 }
 
 $interface_menu[_MD_TADSEARCH_INDEX] = "index.php";
-$interface_icon[_MD_TADSEARCH_INDEX] = "fa-search";
+$interface_icon[_MD_TADSEARCH_INDEX] = "fa-magnifying-glass";

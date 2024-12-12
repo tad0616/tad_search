@@ -92,7 +92,7 @@ class Tad_search
         while ($data = $xoopsDB->fetchArray($result)) {
 
             //將 uid 編號轉換成使用者姓名（或帳號）
-            $data['uid_name'] = Tools::get_name_by_uid($data['uid']);
+            $data['uid_name'] = Utility::get_name_by_uid($data['uid']);
 
             if ($filter) {
                 foreach ($data as $key => $value) {
@@ -190,7 +190,7 @@ class Tad_search
         $xoopsTpl->assign('Bootstrap3EditableCode', $Bootstrap3EditableCode);
 
         //將 uid 編號轉換成使用者姓名（或帳號）
-        $uid_name = Tools::get_name_by_uid($uid);
+        $uid_name = Utility::get_name_by_uid($uid);
         $all['uid_name'] = $uid_name;
 
         $SweetAlert = new SweetAlert();
@@ -720,12 +720,24 @@ class Tad_search
         return $id;
     }
 
-    // 將文字轉為數字
+    // 將 Excel 欄位文字轉為數字
     public static function getIndex($let)
     {
-        // Iterate through each letter, starting at the back to increment the value
-        for ($num = 0, $i = 0; $let != ''; $let = substr($let, 0, -1), $i++) {
-            $num += (ord(substr($let, -1)) - 65) * pow(26, $i);
+        // 確保輸入為大寫字母
+        $let = strtoupper($let);
+
+        // 驗證輸入是否符合格式
+        if (!preg_match('/^[A-Z]+$/', $let)) {
+            throw new InvalidArgumentException('Invalid column format. Only uppercase letters are allowed.');
+        }
+
+        // 計算數字值
+        $num = 0;
+        $length = strlen($let);
+        for ($i = 0; $i < $length; $i++) {
+            // 使用 ASCII 值轉換字母 (A=1, B=2, ..., Z=26)
+            $num *= 26;
+            $num += (ord($let[$i]) - ord('A') + 1);
         }
 
         return $num;

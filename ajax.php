@@ -4,6 +4,7 @@ use XoopsModules\Tadtools\TadDataCenter;
 use XoopsModules\Tadtools\Utility;
 
 include_once "header.php";
+header('HTTP/1.1 200 OK');
 $xoopsLogger->activated = false;
 
 $op = Request::getString('op');

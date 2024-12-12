@@ -141,7 +141,7 @@
                 <div class="input-group-prepend input-group-addon">
                     <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_DISPLAY_SEARCHBOX}></span>
                 </div>
-                <select name="TDC[show_search_box]" id="show_search_box" class="form-select">
+                <select name="TDC[show_search_box]" id="show_search_box" class="form-control form-select">
                     <option value="1" <{if $show_search_box != '0'}>selected<{/if}>><{$smarty.const._YES}></option>
                     <option value="0" <{if $show_search_box == '0'}>selected<{/if}>><{$smarty.const._NO}></option>
                 </select>
@@ -151,7 +151,7 @@
                 <div class="input-group-prepend input-group-addon">
                     <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_DISPLAY_PKID}></span>
                 </div>
-                <select name="TDC[show_pkid]" id="show_pkid" class="form-select">
+                <select name="TDC[show_pkid]" id="show_pkid" class="form-control form-select">
                     <option value="1" <{if $show_pkid != '0'}>selected<{/if}>><{$smarty.const._YES}></option>
                     <option value="0" <{if $show_pkid == '0'}>selected<{/if}>><{$smarty.const._NO}></option>
                 </select>
@@ -161,7 +161,7 @@
                 <div class="input-group-prepend input-group-addon">
                     <span class="input-group-text"><{$smarty.const._MD_TADSEARCH_URL_MODE}></span>
                 </div>
-                <select name="TDC[url_mode]" id="url_mode" class="form-select">
+                <select name="TDC[url_mode]" id="url_mode" class="form-control form-select">
                     <option value="full" <{if $url_mode != 'short'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_URL_FULL}></option>
                     <option value="short" <{if $url_mode == 'short'}>selected<{/if}>><{$smarty.const._MD_TADSEARCH_URL_SHORT}></option>
                 </select>
@@ -193,7 +193,7 @@
         <input type="hidden" name="op" value="<{$next_op|default:''}>">
         <input type="hidden" name="id" value="<{$id|default:''}>">
 
-        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
     </div>
 </form>
 
