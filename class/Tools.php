@@ -43,7 +43,7 @@ class Tools
 
         if (is_array($value)) {
             foreach ($value as $k => $v) {
-                $v = self::filter($key, $v, $mode, $filter_arr);
+                $v         = self::filter($key, $v, $mode, $filter_arr);
                 $value[$k] = $v;
             }
         } else {
@@ -72,7 +72,7 @@ class Tools
                     }
                 }
 
-            } elseif (!isset($filter_arr['pass']) || !in_array($key, $filter_arr['pass'], true)) {
+            } elseif (! isset($filter_arr['pass']) || ! in_array($key, $filter_arr['pass'], true)) {
                 if ($mode == 'edit') {
                     $value = $myts->htmlSpecialChars($value);
                 } else {
@@ -90,7 +90,7 @@ class Tools
         if (is_array($where_rule)) {
             $and_where_rule = '';
             foreach ($where_rule as $col => $value) {
-                $and_where_rule .= !is_string($col) ? " and {$value}" : " and `{$col}` = '{$value}'";
+                $and_where_rule .= ! is_string($col) ? " and {$value}" : " and `{$col}` = '{$value}'";
             }
         } else {
             $and_where_rule = $where_rule;
@@ -114,12 +114,14 @@ class Tools
     // 權限檢查
     public static function chk_is_adm($other = '', $id = '', $file = '', $line = '', $to = '')
     {
+        global $xoopsModule;
+        $tad_search_dirname = $xoopsModule->getVar('dirname');
         if (empty($to)) {
             $to = $_SERVER['PHP_SELF'];
         }
-        if ($_SESSION['tad_search_adm'] || ($other != '' && $_SESSION[$other]) || strpos($_SERVER['PHP_SELF'], '/admin/') !== false) {
-            if (!empty($id) && $_SESSION[$other]) {
-                if (!in_array($id, $_SESSION[$other])) {
+        if ($_SESSION[$tad_search_dirname . '_adm'] || ($other != '' && $_SESSION[$other]) || strpos($_SERVER['PHP_SELF'], '/admin/') !== false) {
+            if (! empty($id) && $_SESSION[$other]) {
+                if (! in_array($id, $_SESSION[$other])) {
                     redirect_header($to, 3, _MD_TADSEARCH_NO_ACCESS_TO_THIS . " ($id)  {$file} ($line)");
                 }
             }

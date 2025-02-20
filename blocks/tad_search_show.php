@@ -1,5 +1,8 @@
 <?php
 use XoopsModules\Tad_search\Tad_search;
+if (! class_exists('XoopsModules\Tad_search\Tad_search')) {
+    require XOOPS_ROOT_PATH . '/modules/tad_search/preloads/autoloader.php';
+}
 /**
  * Tad Search module
  *
@@ -29,19 +32,19 @@ if ($mod_name != 'tad_search') {
 }
 
 //區塊主函式 (tad_search_show)
-if (!function_exists('tad_search_show')) {
+if (! function_exists('tad_search_show')) {
     function tad_search_show($options = '')
     {
-        $mod_name = $options[0];
+        $mod_name          = $options[0];
         $block['mod_name'] = $mod_name;
-        $block['id'] = $options[1] ? (int) $options[1] : 1;
-        $block['content'] = Tad_search::show($mod_name, ['enable' => 1, 'id' => $block['id']], [], 'return');
+        $block['id']       = $options[1] ? (int) $options[1] : 1;
+        $block['content']  = Tad_search::show($mod_name, ['enable' => 1, 'id' => $block['id']], [], 'return');
         return $block;
     }
 }
 
 //區塊編輯函式 (tad_search_show_edit)
-if (!function_exists('tad_search_show_edit')) {
+if (! function_exists('tad_search_show_edit')) {
     function tad_search_show_edit($options = '')
     {
 
@@ -52,7 +55,7 @@ if (!function_exists('tad_search_show_edit')) {
         $all_search = Tad_search::get_all($mod_name, ['enable' => 1]);
         foreach ($all_search as $search) {
             $selected = $options[1] == $search['id'] ? 'selected' : '';
-            $option = "<option value='{$search['id']}' $selected>{$search['title']}</option>";
+            $option   = "<option value='{$search['id']}' $selected>{$search['title']}</option>";
         }
 
         $form = "

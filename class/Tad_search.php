@@ -175,6 +175,7 @@ class Tad_search
 
         $Bootstrap3EditableCode = '';
         $can_modify = Utility::power_chk('modify', $id, $xoopsModule->mid(), true, $mod_name);
+        Utility::test($can_modify, 'can_modify', 'dd');
         $xoopsTpl->assign('can_modify', $can_modify);
         if ($can_modify || !empty($my_row)) {
             $Bootstrap3Editable = new Bootstrap3Editable();

@@ -1,5 +1,9 @@
 <?php
 use XoopsModules\Tad_search\Tad_search;
+if (! class_exists('XoopsModules\Tad_search\Tad_search')) {
+    require XOOPS_ROOT_PATH . '/modules/tad_search/preloads/autoloader.php';
+}
+
 /**
  * Tad Search module
  *
@@ -29,26 +33,26 @@ if ($mod_name != 'tad_search') {
 }
 
 //區塊主函式 (tad_search_index)
-if (!function_exists('tad_search_index')) {
+if (! function_exists('tad_search_index')) {
     function tad_search_index($options = '')
     {
-        $mod_name = $options[0];
+        $mod_name          = $options[0];
         $block['mod_name'] = $mod_name;
-        $block['content'] = Tad_search::get_all($mod_name, ['enable' => 1]);
+        $block['content']  = Tad_search::get_all($mod_name, ['enable' => 1]);
 
         return $block;
     }
 }
 
 //區塊編輯函式 (tad_search_index_edit)
-if (!function_exists('tad_search_index_edit')) {
+if (! function_exists('tad_search_index_edit')) {
     function tad_search_index_edit($options = '')
     {
 
         // $mod_name = basename(dirname(dirname(__FILE__)));
 
         $mod_name = $options[0];
-        $form = "
+        $form     = "
         <ol class='my-form'>
             <li class='my-row'>
                 <lable class='my-label'>模組目錄（沒事勿改）</lable>

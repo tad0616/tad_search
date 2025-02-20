@@ -28,10 +28,10 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 $tad_search_dirname = basename(__DIR__);
 
 /*-----------變數過濾----------*/
-$op = Request::getString('op');
-$id = Request::getInt('id', $xoopsModuleConfig['single_mode']);
-$mode = Request::getString('mode');
-$key_value = Request::getArray('key_value');
+$op                      = Request::getString('op');
+$id                      = Request::getInt('id', $xoopsModuleConfig['single_mode']);
+$mode                    = Request::getString('mode');
+$key_value               = Request::getArray('key_value');
 $_SESSION['single_mode'] = $xoopsModuleConfig['single_mode'];
 /*-----------執行動作判斷區----------*/
 switch ($op) {
@@ -90,7 +90,7 @@ switch ($op) {
             Tad_search::index($where_arr, [], [], 20);
             $op = 'tad_search_index';
         } else {
-            $where_arr['id'] = $id;
+            $where_arr['id']     = $id;
             $where_arr['enable'] = '1';
 
             Tad_search::show($tad_search_dirname, $where_arr, $key_value, $mode);
@@ -103,6 +103,7 @@ switch ($op) {
 $xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu, false, $interface_icon));
 $xoopsTpl->assign('now_op', $op);
 $xoopsTpl->assign('tad_search_dirname', $tad_search_dirname);
+$xoopsTpl->assign('session_tad_search_adm', $_SESSION[$tad_search_dirname . '_adm']);
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/{$tad_search_dirname}/css/module.css");
 require_once XOOPS_ROOT_PATH . '/footer.php';
 

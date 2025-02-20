@@ -14,7 +14,7 @@
     <{assign var="show_result" value=false }>
     <{assign var="show_note" value=$smarty.const._MD_TADSEARCH_NEED_KEY_IN}>
 <{/if}>
-<{if $smarty.session.tad_search_adm|default:false && $show_tools|default:false || !$smarty.session.single_mode|default:false && !$from_block}>
+<{if $session_tad_search_adm|default:false && $show_tools|default:false || !$smarty.session.single_mode|default:false && !$from_block}>
     <div class="row">
         <div class="col-lg-6">
             <h2 class="my">
@@ -22,10 +22,10 @@
             </h2>
         </div>
         <div class="col-lg-6 text-right text-end">
-            <{if $smarty.session.tad_search_adm|default:false && $show_tools|default:false}>
+            <{if $session_tad_search_adm|default:false && $show_tools|default:false}>
                 <a href="javascript:tad_search_destroy_func(<{$id|default:''}>);" class="btn btn-sm btn-danger" data-toggle="tooltip" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_create&id=<{$id|default:''}>" class="btn btn-sm btn-warning" data-toggle="tooltip" title="<{$smarty.const._TAD_EDIT}>"><i class="fa fa-pencil" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
-                <{if $smarty.session.tad_search_adm|default:false && $smarty.session.single_mode==0}>
+                <{if $session_tad_search_adm|default:false && $smarty.session.single_mode==0}>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?op=tad_search_add" class="btn btn-sm btn-primary" data-toggle="tooltip" title="<{$smarty.const._TAD_ADD}>"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
                 <{/if}>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/excel_export.php?id=<{$id|default:''}>" class="btn btn-sm btn-success" data-toggle="tooltip" title="<{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}>"><i class="fa fa-file-excel " aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_EXPORT_EXCEL}></a>
@@ -71,7 +71,7 @@
 
     <{if $show_note|default:false}>
 
-        <{if $can_modify && $show_tools}>
+        <{if $can_modify|default:false && $show_tools}>
             <{if (isset($smarty.get.mode) && $smarty.get.mode=="edit")}>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?id=<{$id|default:''}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
             <{else}>
@@ -111,7 +111,7 @@
         </form>
     <{/if}>
 
-    <{if $show_result || (isset($smarty.get.mode) && $smarty.get.mode=="edit")}>
+    <{if $show_result || (($can_modify || $can_add || $my_row) && $show_tools && (isset($smarty.get.mode) && $smarty.get.mode=="edit"))}>
         <{$BootstrapTable|default:''}>
         <{if ($can_modify || $can_add || $my_row) && $show_tools && (isset($smarty.get.mode) && $smarty.get.mode=="edit")}>
             <{$Bootstrap3EditableCode|default:''}>
@@ -125,7 +125,7 @@
             <button type="button" id="add_button" class="btn btn-primary btn-sm my-2"><i class="fa fa-square-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_ADD_DATA}></button>
         <{/if}>
 
-        <{if $can_modify && $show_tools}>
+        <{if $can_modify|default:false && $show_tools}>
             <{if (isset($smarty.get.mode) && $smarty.get.mode=="edit")}>
                 <a href="<{$xoops_url}>/modules/<{$tad_search_dirname|default:''}>/index.php?id=<{$id|default:''}>" class="btn btn-success btn-sm my-2"><i class="fa fa-eyes" aria-hidden="true"></i> <{$smarty.const._MD_TADSEARCH_VIEW_MODE}></a>
             <{else}>
